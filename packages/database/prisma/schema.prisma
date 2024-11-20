@@ -1,0 +1,462 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_PRISMA_URL_DIRECT")
+}
+
+model Product {
+  id              Int             @id @default(autoincrement())
+  name            String          @db.VarChar(100)
+  description     String?         @db.Text()
+  keywords        String?         @db.VarChar(100)
+  price           Float
+  resellerPrice   Float           @default(0)
+  cost            Float           @default(0)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  hasSizes        Boolean         @default(false)
+  integratesStock Boolean         @default(true)
+  images          ProductImage[]
+  purchaseItems   PurchaseItem[]
+  saleItems       SaleItem[]
+  category        ProductCategory @relation(fields: [categoryId], references: [id])
+  categoryId      Int
+  supplier        Supplier        @relation(fields: [supplierId], references: [id])
+  supplierId      String
+  company         Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId       String
+  deleted         Boolean         @default(false)
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  url       String
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Purchase {
+  id                      Int                      @id @default(autoincrement())
+  items                   PurchaseItem[]
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
+  bankAccountTransactions BankAccountTransaction[]
+  comments                String?                  @db.Text()
+  supplierId              String
+  supplier                Supplier                 @relation(fields: [supplierId], references: [id])
+  bankAccount             BankAccount?             @relation(fields: [bankAccountId], references: [id])
+  bankAccountId           Int?
+  subTotal                Float                    @default(0)
+  discount                Float                    @default(0)
+  total                   Float                    @default(0)
+  company                 Company                  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId               String
+  payments                Payment[]
+}
+
+model PurchaseItem {
+  id            Int          @id @default(autoincrement())
+  quantity      Int          @default(1)
+  productId     Int
+  cost          Float        @default(0)
+  purchaseId    Int?
+  product       Product      @relation(fields: [productId], references: [id])
+  purchase      Purchase?    @relation(fields: [purchaseId], references: [id])
+  productSizeId Int?
+  productSize   ProductSize? @relation(fields: [productSizeId], references: [id])
+}
+
+model BankAccountTransaction {
+  id            Int         @id @default(autoincrement())
+  amount        Float       @default(0)
+  bankAccountId Int
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id])
+  purchaseId    Int?
+  purchase      Purchase?   @relation(fields: [purchaseId], references: [id])
+  saleId        Int?
+  sale          Sale?       @relation(fields: [saleId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  payment       Payment?    @relation(fields: [paymentId], references: [id])
+  paymentId     String?
+  company       Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId     String
+
+  @@index([companyId])
+  @@index([bankAccountId])
+}
+
+enum SaleVia {
+  PERSONAL
+  WEB
+  ML
+}
+
+model Sale {
+  id                      Int                      @id @default(autoincrement())
+  items                   SaleItem[]
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
+  bankAccountId           Int?
+  bankAccount             BankAccount?             @relation(fields: [bankAccountId], references: [id])
+  customerId              String
+  customer                Customer                 @relation(fields: [customerId], references: [id])
+  comments                String?                  @db.Text()
+  isReseller              Boolean                  @default(false)
+  isCancelled             Boolean                  @default(false)
+  via                     SaleVia                  @default(PERSONAL)
+  bankAccountTransactions BankAccountTransaction[]
+  subTotal                Float                    @default(0)
+  discount                Float                    @default(0)
+  otherCharges            Float                    @default(0) //otros cargos/gastos
+  total                   Float                    @default(0)
+  company                 Company                  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId               String
+  payments                Payment[]
+}
+
+model SaleItem {
+  id            Int          @id @default(autoincrement())
+  quantity      Int          @default(1)
+  productId     Int
+  price         Float        @default(0)
+  saleId        Int?
+  product       Product      @relation(fields: [productId], references: [id])
+  sale          Sale?        @relation(fields: [saleId], references: [id])
+  productSize   ProductSize? @relation(fields: [productSizeId], references: [id])
+  productSizeId Int?
+}
+
+model ProductCategory {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(100)
+  products  Product[]
+  company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId String
+  deleted   Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model ProductSize {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(100)
+  company      Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId    String
+  PurchaseItem PurchaseItem[]
+  SaleItem     SaleItem[]
+  deleted      Boolean        @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model BankAccount {
+  id                      Int                      @id @default(autoincrement())
+  name                    String                   @db.VarChar(100)
+  cbu                     String                   @db.VarChar(100)
+  alias                   String                   @db.VarChar(100)
+  purchases               Purchase[]
+  sale                    Sale[]
+  bankAccountTransactions BankAccountTransaction[]
+  payments                Payment[]
+  company                 Company                  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId               String
+  deleted                 Boolean                  @default(false)
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
+}
+
+model Supplier {
+  id          String     @id @default(cuid())
+  name        String     @db.VarChar(100)
+  email       String?    @db.VarChar(100)
+  phoneNumber String?    @db.VarChar(100)
+  purchases   Purchase[]
+  products    Product[]
+  notes       String?    @db.Text()
+  company     Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId   String
+  deleted     Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Customer {
+  id           String        @id @default(cuid())
+  name         String        @db.VarChar(100)
+  email        String?       @db.VarChar(100)
+  phoneNumber  String?       @db.VarChar(100)
+  notes        String?       @db.Text()
+  birthdate    DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  sales        Sale[]
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId    String
+  appointments Appointment[]
+  deleted      Boolean       @default(false)
+
+  @@index([companyId])
+}
+
+model Company {
+  id                       String                   @id @default(cuid())
+  name                     String                   @db.VarChar(100)
+  address                  String?                  @db.VarChar(100)
+  city                     String?                  @db.VarChar(100)
+  province                 String?                  @db.VarChar(100)
+  country                  String?                  @db.VarChar(100)
+  phoneNumber              String?                  @db.VarChar(100)
+  whatsapp                 String?                  @db.VarChar(100)
+  email                    String?                  @db.VarChar(100)
+  createdAt                DateTime                 @default(now())
+  updatedAt                DateTime                 @updatedAt
+  logo                     String?
+  website                  String?                  @db.VarChar(100)
+  instagram                String?                  @db.VarChar(100)
+  facebook                 String?                  @db.VarChar(100)
+  slug                     String?                  @unique
+  welcomeText              String?
+  mercadoPagoPreApprovalId String?
+  headerImage              String?
+  active                   Boolean                  @default(true)
+  options                  CompanyOptions?
+  customers                Customer[]
+  suppliers                Supplier[]
+  bankAccounts             BankAccount[]
+  categories               ProductCategory[]
+  products                 Product[]
+  purchases                Purchase[]
+  sales                    Sale[]
+  users                    User[]
+  bankAccountTransactions  BankAccountTransaction[]
+  productSizes             ProductSize[]
+  services                 Service[]
+  appointments             Appointment[]
+  payments                 Payment[]
+  schedules                Schedule[]
+  businessHours            BusinessHour[]
+  paymentMethods           CompanyPaymentMethod[]
+  companyPlan              CompanyPlan              @relation(fields: [companyPlanId], references: [id])
+  companyPlanId            String
+  companyCategory          CompanyCategory?         @relation(fields: [companyCategoryId], references: [id])
+  companyCategoryId        String?
+
+  @@index([slug])
+}
+
+model User {
+  id           String        @id @default(cuid())
+  firstName    String?       @db.VarChar(100)
+  lastName     String?       @db.VarChar(100)
+  email        String        @db.VarChar(100)
+  clerkId      String        @unique
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId    String
+  appointments Appointment[]
+}
+
+model Service {
+  id                String            @id @default(cuid())
+  name              String            @db.VarChar(100)
+  description       String?           @db.Text()
+  durationInMinutes Int               @default(30)
+  price             Float
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  appointments      Appointment[]
+  company           Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId         String
+  scheduleServices  ScheduleService[]
+  deleted           Boolean           @default(false)
+
+  @@index([companyId])
+}
+
+model Appointment {
+  id                 String            @id @default(cuid())
+  customerId         String
+  customer           Customer          @relation(fields: [customerId], references: [id])
+  fromDatetime       DateTime
+  toDatetime         DateTime
+  publicNotes        String?
+  privateNotes       String?
+  totalToPay         Float
+  chargeStatus       ChargeStatus      @default(NO_COBRADO)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  schedule           Schedule          @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  scheduleId         String
+  company            Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId          String
+  user               User?             @relation(fields: [userId], references: [id])
+  userId             String?
+  serviceId          String
+  service            Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  status             AppointmentStatus @default(NO_CONFIRMADO)
+  cancellationReason String?
+  sentAsReminder     Boolean           @default(false) //enviado via cron al negocio
+  payments           Payment[]
+
+  @@index([companyId])
+  @@index([customerId])
+  @@index([fromDatetime])
+  @@index([toDatetime])
+  @@index([status])
+  @@index([chargeStatus])
+}
+
+model Payment {
+  id                      String                   @id @default(cuid())
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
+  title                   String                   @db.VarChar(100)
+  description             String?                  @db.Text()
+  type                    PaymentType              @default(COBRANZA)
+  amount                  Float
+  isCancelled             Boolean                  @default(false)
+  comments                String?                  @db.Text()
+  companyId               String
+  company                 Company                  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  appointmentId           String?
+  appointment             Appointment?             @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  purchaseId              Int?
+  purchase                Purchase?                @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  saleId                  Int?
+  sale                    Sale?                    @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  bankAccountId           Int
+  bankAccount             BankAccount              @relation(fields: [bankAccountId], references: [id])
+  bankAccountTransactions BankAccountTransaction[]
+
+  @@index([companyId])
+  @@index([bankAccountId])
+  @@index([appointmentId])
+  @@index([purchaseId])
+  @@index([saleId])
+}
+
+enum PaymentType {
+  COBRANZA
+  PAGO
+}
+
+enum AppointmentStatus {
+  NO_CONFIRMADO
+  CONFIRMADO
+  CANCELADO
+}
+
+model Schedule {
+  id               String            @id @default(cuid())
+  name             String            @db.VarChar(100)
+  appointments     Appointment[]
+  businessHours    BusinessHour[]
+  services         ScheduleService[]
+  minDaysInAdvance Int               @default(0) // Establece con cuántos días de anticipación mínimos se podrán reservar turnos. default: 0: se puede reservar para el mismo dia
+  maxDaysInAdvance Int               @default(30) // Establece con cuántos días de anticipación se podrán reservar turnos. default: desde minDaysInAdvance + 30 dias
+  personInCharge   String?           @db.VarChar(100)
+  company          Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId        String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  active           Boolean           @default(true)
+
+  @@index([companyId])
+}
+
+model ScheduleService {
+  schedule   Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  scheduleId String
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceId  String
+
+  @@id([scheduleId, serviceId]) // Llave primaria compuesta
+}
+
+model BusinessHour {
+  id         String    @id @default(cuid())
+  dayOfWeek  Int // Ahora es un entero (0 = Domingo, 6 = Sábado) = new Date().getUTCDay()
+  openTime   DateTime // Hora de apertura  
+  closeTime  DateTime // Hora de cierre  
+  active     Boolean   @default(true)
+  company    Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId  String
+  schedule   Schedule? @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  scheduleId String?
+
+  @@index([companyId])
+  @@index([scheduleId])
+}
+
+enum ChargeStatus {
+  NO_COBRADO
+  COBRADO_PARCIALMENTE
+  COBRADO
+}
+
+model PaymentMethod {
+  id          String                 @id @default(cuid())
+  name        String                 @unique
+  description String?                @db.Text()
+  companies   CompanyPaymentMethod[]
+}
+
+model CompanyPaymentMethod {
+  id              String        @id @default(cuid())
+  companyId       String
+  paymentMethodId String
+  company         Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, paymentMethodId]) // Llave compuesta para evitar duplicados
+  @@index([companyId])
+  @@index([paymentMethodId])
+}
+
+model CompanyPlan {
+  id                         String    @id @default(cuid())
+  name                       String    @db.VarChar(100)
+  bestSeller                 Boolean   @default(false)
+  maxSchedules               Int       @default(2) // cantidad de agendas
+  maxSppointmentsPerSchedule Int       @default(50) // cantidad de turnos activos por agenda
+  price                      Float
+  payments                   Boolean   @default(false)
+  analytics                  Boolean   @default(false)
+  multipleBusinessHours      Boolean   @default(false)
+  companies                  Company[]
+}
+
+model CompanyOptions {
+  id                            Int                   @id @default(autoincrement())
+  webReservations               Boolean               @default(false)
+  webPayments                   Boolean               @default(false) /// 
+  webServicesVisibility         WebServicesVisibility @default(SOLO_SERVICIOS) //modo de mostrar los servicios en la pagina web
+  showPersonInChargeReservation Boolean               @default(false) // mostrar desplegable de la persona responsable en la reserva que hace el usuario
+  canCreatePastAppointments     Boolean               @default(false) // poder crear turnos con fecha menor a hoy
+  companyId                     String                @unique // Relación con la empresa, uno a uno
+  company                       Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+enum WebServicesVisibility {
+  NO_MOSTRAR
+  SOLO_SERVICIOS
+  SERVICIOS_CON_PRECIOS
+}
+
+model CompanyCategory {
+  id           String    @id @default(cuid())
+  name         String    @db.VarChar(100)
+  description  String    @db.Text()
+  helpText     String    @db.Text()
+  visibleInWeb Boolean   @default(true)
+  companies    Company[]
+}

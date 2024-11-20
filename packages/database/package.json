@@ -1,0 +1,18 @@
+{
+  "name": "@repo/database",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push --skip-generate",
+    "seed": "ts-node seed.ts"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^1.5.2",
+    "@prisma/client": "^5.11.0"
+  },
+  "devDependencies": {
+    "prisma": "latest"
+  }
+}
