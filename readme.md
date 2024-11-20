@@ -42,7 +42,7 @@ npm install
 
 # 3. Set up environment variables
 # Create a `.env` file with the following content:
-echo "DATABASE_URL=postgresql://user:password@localhost:5432/database_name" > .env
+"DATABASE_URL=postgresql://user:password@localhost:5432/database_name" > .env
 
 # 4. Run database migrations
 npx prisma migrate dev
