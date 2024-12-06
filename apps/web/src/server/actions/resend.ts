@@ -1,10 +1,10 @@
 import { Resend } from "resend";
 import { getAppointmentById } from "../queries/appointments";
 import { getLoggedInUser } from "../queries/users";
-import { ViewAppointmentTemplate } from "@/components/email-templates/view-appointment";
+import { ViewAppointmentTemplate } from "@/components/email-templates/ViewAppointmentTemplate";
 import { getCompanyBySlug } from "../queries/companies";
-import { ConfirmedAppointmentTemplate } from "@/components/email-templates/confirmed-appointment";
-import { CreateAppointmentTemplate } from "@/components/email-templates/create-appointment";
+import { ConfirmedAppointmentTemplate } from "@/components/email-templates/ConfirmedAppointmentTemplate";
+import { CreateAppointmentTemplate } from "@/components/email-templates/CreateAppointmentTemplate";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

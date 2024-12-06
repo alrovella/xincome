@@ -12,8 +12,6 @@ export default async function Page() {
         </PrimaryLink>
       }
     >
-      <meta name="robots" content="noindex" />
-      <title>CUANTAS BANCRIOASSSS</title>
       <BankAccountList />
     </Container>
   );

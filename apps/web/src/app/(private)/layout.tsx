@@ -9,8 +9,8 @@ import { Toaster } from "react-hot-toast";
 import { getLoggedInUser } from "@/server/queries/users";
 import { RedirectToSignIn } from "@clerk/nextjs";
 import { UserContextProvider } from "@/providers/UserContextProvider";
-import { ThemeProvider } from "@/providers/theme-provider";
 import { AppSidebar } from "@/components/common/layout/AppSidebar";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_APP_NAME,
