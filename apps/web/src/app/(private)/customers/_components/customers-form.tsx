@@ -19,10 +19,11 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { customerFormSchema } from "@/schemas/forms/customer-form-schema";
 import { createCustomer, updateCustomer } from "@/server/actions/customers";
-import FormFooter from "@/components/common/forms/form-footer";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormFooter from "@/components/common/forms/FormFooter";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import InputPhone from "@repo/ui/components/ui/phone-input";
+import { format } from "date-fns";
 
 const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
   const router = useRouter();
@@ -35,7 +36,7 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
       email: customer?.email ?? "",
       notes: customer?.notes ?? "",
       birthdate: customer?.birthdate
-        ? String(customer?.birthdate.toISOString().split("T")[0])
+        ? format(customer?.birthdate, "yyyy-MM-dd")
         : undefined,
     },
   });

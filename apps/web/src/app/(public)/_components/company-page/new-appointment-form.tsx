@@ -45,7 +45,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useGetServicesBySchedule } from "@/hooks/queries/useGetServices";
 import { createAppointmenByCustomer } from "@/server/actions/appointments";
 import { customerAppointmentFormSchema } from "@/schemas/forms/appointment.form-schema";
-import { useCompanyPublic } from "@/providers/company-public-provider";
+import { useCompanyPublic } from "@/providers/CompanyPublicContextProvider";
 import { useRouter } from "next/navigation";
 
 const NewAppointmentForm = () => {

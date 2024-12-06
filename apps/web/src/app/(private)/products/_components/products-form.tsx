@@ -27,7 +27,7 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import { Switch } from "@repo/ui/components/ui/switch";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import { addProduct, updateProduct } from "@/server/actions/products";
 import toast from "react-hot-toast";
 

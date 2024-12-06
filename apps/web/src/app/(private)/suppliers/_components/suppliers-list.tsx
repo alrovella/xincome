@@ -8,13 +8,13 @@ import {
   TableHeader,
 } from "@repo/ui/components/ui/table";
 import { Pencil, Users } from "lucide-react";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { useSuppliers } from "@/hooks/queries/useSuppliers";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import { deleteSupplier } from "@/server/actions/suppliers";
 import toast from "react-hot-toast";
-import DeleteAlertDialog from "@/components/common/delete-alert-dialog";
+import DeleteAlertDialog from "@/components/common/DeleteAlertDialog";
 import { useTransition } from "react";
 
 const SupplierList = () => {

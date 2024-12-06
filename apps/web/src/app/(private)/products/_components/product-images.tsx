@@ -10,9 +10,9 @@ import { cn } from "@repo/ui/lib/utils";
 import { Button } from "@repo/ui/components/ui/button";
 import { Progress } from "@repo/ui/components/ui/progress";
 import { useProductImages } from "@/hooks/queries/useProducts";
-import { useEdgeStore } from "@/providers/edgestore-provider";
-import ImagesSkeleton from "@/components/common/skeletons/images-skeleton";
-import DeleteAlertDialog from "@/components/common/delete-alert-dialog";
+import { useEdgeStore } from "@/providers/EdgeStoreProvider";
+import ImagesSkeleton from "@/components/common/skeletons/ImagesSkeleton";
+import DeleteAlertDialog from "@/components/common/DeleteAlertDialog";
 import toast from "react-hot-toast";
 
 export default function ProductImages({

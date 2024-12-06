@@ -27,13 +27,13 @@ import {
   DropdownMenuItem,
 } from "@repo/ui/components/ui/dropdown-menu";
 import { format } from "date-fns";
-import { useAppUser } from "@/providers/user-provider";
+import { useAppUser } from "@/providers/UserContextProvider";
 import {
   type ScheduleForForms,
   scheduleFormSchema,
 } from "@/schemas/forms/schedule-form-schema";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
-import FormFooter from "@/components/common/forms/form-footer";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
+import FormFooter from "@/components/common/forms/FormFooter";
 import { updateSchedule, createSchedule } from "@/server/actions/schedules";
 import type {
   ScheduleExtended,
@@ -41,8 +41,8 @@ import type {
 } from "@/types/entities/schedule";
 import { getDayName } from "@/util/formatters";
 import { createBusinessDate } from "@/util/utils";
-import UpgradePlanLink from "@/components/common/upgrade-plan-link";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import UpgradePlanLink from "@/components/common/UpgradePlanLink";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 
 const ScheduleForm = ({
   schedule,

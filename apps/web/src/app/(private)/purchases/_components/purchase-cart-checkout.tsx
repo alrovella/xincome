@@ -11,7 +11,7 @@ import {
 } from "@repo/ui/components/ui/table";
 import { formatPrice } from "@/util/utils";
 import { usePurchaseStore } from "@/hooks/stores/usePurchaseStore";
-import FormFooter from "@/components/common/forms/form-footer";
+import FormFooter from "@/components/common/forms/FormFooter";
 import { useBankAccounts } from "@/hooks/queries/useBankAccounts";
 import { purchaseFormSchema } from "@/schemas/forms/purchase-form-schema";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -31,10 +31,10 @@ import { Textarea } from "@repo/ui/components/ui/textarea";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { addPurchase } from "@/server/actions/purchases";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import PrimaryLink from "@/components/common/links/primary-link";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import PrimaryLink from "@/components/common/links/PrimaryLink";
 import { Landmark } from "lucide-react";
 
 const PurchaseCartCheckout = () => {

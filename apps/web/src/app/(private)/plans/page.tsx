@@ -1,7 +1,7 @@
 import Plans from "./_components/plans";
 import { Suspense } from "react";
 import { Container } from "@repo/ui/components/ui/container";
-import CardsSkeleton from "@/components/common/skeletons/cards-skeleton";
+import CardsSkeleton from "@/components/common/skeletons/CardsSkeleton";
 
 const Page = async () => {
   return (

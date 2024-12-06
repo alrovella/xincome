@@ -25,7 +25,7 @@ import Link from "next/link";
 import { cn } from "@repo/ui/lib/utils";
 import type { ExtendedAppointment } from "@/types/entities/appointment";
 import { getLastConfirmedAppointmentsByCustomerById } from "@/server/queries/appointments";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import AppointmentFriendlyDatetimeLabel from "../../appointments/_components/appointment-friendly-datetime-label";
 import ChargeStatusBadge from "../../appointments/_components/charge-status-badge";
 import StatusBadge from "../../appointments/_components/status-badge";

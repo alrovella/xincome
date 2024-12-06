@@ -48,15 +48,15 @@ import AppointmentFriendlyDatetimeLabel from "./appointment-friendly-datetime-la
 import { AppointmentCard } from "./appointment-card";
 import { useGetServicesBySchedule } from "@/hooks/queries/useGetServices";
 import type { ExtendedAppointment } from "@/types/entities/appointment";
-import { useAppUser } from "@/providers/user-provider";
+import { useAppUser } from "@/providers/UserContextProvider";
 import { appointmentFormSchema } from "@/schemas/forms/appointment.form-schema";
 import {
   createAppointment,
   updateAppointment,
 } from "@/server/actions/appointments";
-import FormFooter from "@/components/common/forms/form-footer";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormFooter from "@/components/common/forms/FormFooter";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 
 const AppointmentForm = ({
   scheduleId,

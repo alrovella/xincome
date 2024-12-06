@@ -1,6 +1,6 @@
 import { Container } from "@repo/ui/components/ui/container";
 import BankAccountList from "./_components/bank-account-list";
-import PrimaryLink from "@/components/common/links/primary-link";
+import PrimaryLink from "@/components/common/links/PrimaryLink";
 
 export default async function Page() {
   return (
@@ -12,6 +12,8 @@ export default async function Page() {
         </PrimaryLink>
       }
     >
+      <meta name="robots" content="noindex" />
+      <title>CUANTAS BANCRIOASSSS</title>
       <BankAccountList />
     </Container>
   );

@@ -17,10 +17,10 @@ import {
 import { Button } from "@repo/ui/components/ui/button";
 import { usePurchases } from "@/hooks/queries/usePurchases";
 import { useSearchParams } from "next/navigation";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import { formatPrice } from "@/util/utils";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { format } from "date-fns";
 import type { Period } from "@/util/static";
 
@@ -64,14 +64,14 @@ const PurchaseList = () => {
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-muted/0">
-                  <TableHead className="hidden md:table-cell text-center">
+                  <TableHead className="hidden text-center md:table-cell">
                     #
                   </TableHead>
                   <TableHead>Fecha</TableHead>
                   <TableHead className="hidden md:table-cell">
                     Cuentas Bancarias
                   </TableHead>
-                  <TableHead className="hidden md:table-cell text-center">
+                  <TableHead className="hidden text-center md:table-cell">
                     Proveedor
                   </TableHead>
                   <TableHead className="text-right">Total</TableHead>
@@ -139,7 +139,7 @@ const PurchaseList = () => {
                         </Popover>
                       )}
                     </TableCell>
-                    <TableCell className="hidden md:table-cell text-center">
+                    <TableCell className="hidden text-center md:table-cell">
                       {purchase.supplierName}
                     </TableCell>
                     <TableCell className="text-right">

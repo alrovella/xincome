@@ -1,7 +1,7 @@
 "use client";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { usePayments } from "@/hooks/queries/usePayments";
 import type { Period } from "@/util/static";
 import { formatPrice, getPluralPaymentType } from "@/util/utils";

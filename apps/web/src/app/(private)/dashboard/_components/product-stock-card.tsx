@@ -1,8 +1,8 @@
 "use client";
 import { useStockReport } from "@/hooks/queries/useReports";
-import EmptyStateAlert from "../../../../components/common/empty-state-alert";
-import ListSkeleton from "../../../../components/common/skeletons/list-skeleton";
-import { useCallback, useEffect, useState } from "react";
+import EmptyStateAlert from "../../../../components/common/EmptyStateAlert";
+import ListSkeleton from "../../../../components/common/skeletons/ListSkeleton";
+import { useEffect, useState } from "react";
 import type { ProductStock } from "@/types/entities/products";
 import {
   Table,
@@ -47,36 +47,32 @@ const ProductStockCard = () => {
     }
   }, [data]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  const handleSort = useCallback(
-    (sortCriteria: string) => {
-      const sortedList = [...sortedStock].sort(
-        (a: ProductStock, b: ProductStock) => {
-          if (sortCriteria === "sizeAsc") {
-            if (!a.productSizeName) return 1;
-            if (!b.productSizeName) return -1;
-            return a.productSizeName.localeCompare(b.productSizeName);
-          }
-          if (sortCriteria === "stockAsc") return a.stock - b.stock;
-          if (sortCriteria === "stockDesc") return b.stock - a.stock;
-          if (sortCriteria === "nameAsc")
-            return a.productName.localeCompare(b.productName);
-          if (sortCriteria === "nameDesc")
-            return b.productName.localeCompare(a.productName);
-          if (sortCriteria === "salesAsc") return a.totalSales - b.totalSales;
-          if (sortCriteria === "salesDesc") return b.totalSales - a.totalSales;
-          if (sortCriteria === "purchasesAsc")
-            return a.totalPurchases - b.totalPurchases;
-          if (sortCriteria === "purchasesDesc")
-            return b.totalPurchases - a.totalPurchases;
-          return 0;
+  const handleSort = (sortCriteria: string) => {
+    const sortedList = [...sortedStock].sort(
+      (a: ProductStock, b: ProductStock) => {
+        if (sortCriteria === "sizeAsc") {
+          if (!a.productSizeName) return 1;
+          if (!b.productSizeName) return -1;
+          return a.productSizeName.localeCompare(b.productSizeName);
         }
-      );
-      setSortedStock(sortedList);
-      setSortBy(sortCriteria);
-    },
-    [sortedStock, setSortedStock]
-  );
+        if (sortCriteria === "stockAsc") return a.stock - b.stock;
+        if (sortCriteria === "stockDesc") return b.stock - a.stock;
+        if (sortCriteria === "nameAsc")
+          return a.productName.localeCompare(b.productName);
+        if (sortCriteria === "nameDesc")
+          return b.productName.localeCompare(a.productName);
+        if (sortCriteria === "salesAsc") return a.totalSales - b.totalSales;
+        if (sortCriteria === "salesDesc") return b.totalSales - a.totalSales;
+        if (sortCriteria === "purchasesAsc")
+          return a.totalPurchases - b.totalPurchases;
+        if (sortCriteria === "purchasesDesc")
+          return b.totalPurchases - a.totalPurchases;
+        return 0;
+      }
+    );
+    setSortedStock(sortedList);
+    setSortBy(sortCriteria);
+  };
 
   return (
     <>
@@ -116,10 +112,10 @@ const ProductStockCard = () => {
                   <TableRow className="hover:bg-muted/0">
                     <TableHead>Producto</TableHead>
                     <TableHead className="text-center">Talle</TableHead>
-                    <TableHead className="hidden md:table-cell text-center">
+                    <TableHead className="hidden text-center md:table-cell">
                       Comprado
                     </TableHead>
-                    <TableHead className="hidden md:table-cell text-center">
+                    <TableHead className="hidden text-center md:table-cell">
                       Vendido
                     </TableHead>
                     <TableHead className="font-bold text-center">
@@ -152,10 +148,10 @@ const ProductStockCard = () => {
                       <TableCell className="text-center">
                         {item.productSizeName}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell text-center">
+                      <TableCell className="hidden text-center md:table-cell">
                         {item.totalPurchases}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell text-center">
+                      <TableCell className="hidden text-center md:table-cell">
                         {item.totalSales}
                       </TableCell>
                       <TableCell className="font-bold text-center">
@@ -185,13 +181,13 @@ const ProductStockCard = () => {
                       </div>
                     </TableHead>
                     <TableHead className="text-left"> </TableHead>
-                    <TableHead className="hidden md:table-cell text-center">
+                    <TableHead className="hidden text-center md:table-cell">
                       {data?.reduce(
                         (acc, item) => acc + item.totalPurchases,
                         0
                       )}
                     </TableHead>
-                    <TableHead className="hidden md:table-cell text-center">
+                    <TableHead className="hidden text-center md:table-cell">
                       {data?.reduce((acc, item) => acc + item.totalSales, 0)}
                     </TableHead>
                     <TableHead className="font-bold text-center">

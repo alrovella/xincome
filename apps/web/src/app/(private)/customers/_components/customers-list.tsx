@@ -1,7 +1,7 @@
 "use client";
 import { useCustomers } from "@/hooks/queries/useCustomers";
 import { useSearchParams } from "next/navigation";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import {
   Table,
   TableBody,
@@ -10,15 +10,15 @@ import {
   TableHeader,
   TableRow,
 } from "@repo/ui/components/ui/table";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { Pencil, Users } from "lucide-react";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 import CustomerAppointmentsDrawer from "./customer-appointments-drawer";
 import { cn } from "@repo/ui/lib/utils";
 import { buttonVariants } from "@repo/ui/components/ui/button";
 import toast from "react-hot-toast";
 import { deleteCustomer } from "@/server/actions/customers";
-import DeleteAlertDialog from "@/components/common/delete-alert-dialog";
+import DeleteAlertDialog from "@/components/common/DeleteAlertDialog";
 import { useTransition } from "react";
 
 const CustomerList = () => {

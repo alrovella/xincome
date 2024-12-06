@@ -3,7 +3,7 @@ import type { PaymentType } from "@repo/database";
 import { Container } from "@repo/ui/components/ui/container";
 import PaymentForm from "../../_components/payment-form";
 import { Suspense } from "react";
-import FormSkeleton from "@/components/common/skeletons/form-skeleton";
+import FormSkeleton from "@/components/common/skeletons/FormSkeleton";
 
 export default async function Page({
   searchParams,

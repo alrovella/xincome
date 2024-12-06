@@ -2,7 +2,7 @@ import { getBankAccount } from "@/server/queries/bank-accounts";
 import BankAccountForm from "../_components/bank-account-form";
 import { Container } from "@repo/ui/components/ui/container";
 import { Suspense } from "react";
-import FormSkeleton from "@/components/common/skeletons/form-skeleton";
+import FormSkeleton from "@/components/common/skeletons/FormSkeleton";
 
 export default async function Page({
   searchParams,

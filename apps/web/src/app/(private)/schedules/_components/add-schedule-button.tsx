@@ -1,9 +1,9 @@
 "use client";
 
 import { AlertCircle } from "lucide-react";
-import UpgradePlanLink from "@/components/common/upgrade-plan-link";
-import { useAppUser } from "@/providers/user-provider";
-import PrimaryLink from "@/components/common/links/primary-link";
+import UpgradePlanLink from "@/components/common/UpgradePlanLink";
+import { useAppUser } from "@/providers/UserContextProvider";
+import PrimaryLink from "@/components/common/links/PrimaryLink";
 
 const AddScheduleButton = () => {
   const { company } = useAppUser();

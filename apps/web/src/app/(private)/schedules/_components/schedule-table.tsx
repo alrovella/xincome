@@ -12,8 +12,8 @@ import Link from "next/link";
 import { useSchedules } from "@/hooks/queries/useSchedule";
 import ScheduleTableRow from "./schedule-table-row";
 import { deleteSchedule } from "@/server/actions/schedules";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 
 const ScheduleTable = () => {
   const [deletingSchedule, setDeletingSchedule] = useState(false);

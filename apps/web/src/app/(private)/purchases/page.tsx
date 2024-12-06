@@ -1,7 +1,7 @@
-import ListFilters from "@/components/common/list-filters";
+import ListFilters from "@/components/common/ListFilters";
 import PurchaseList from "./_components/purchase-list";
 import { Container } from "@repo/ui/components/ui/container";
-import PrimaryLink from "@/components/common/links/primary-link";
+import PrimaryLink from "@/components/common/links/PrimaryLink";
 
 export default async function Page() {
   return (

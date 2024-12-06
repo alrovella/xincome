@@ -22,13 +22,13 @@ import {
   SelectContent,
   SelectItem,
 } from "@repo/ui/components/ui/select";
-import FormFooter from "@/components/common/forms/form-footer";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormFooter from "@/components/common/forms/FormFooter";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import { useBankAccounts } from "@/hooks/queries/useBankAccounts";
 import type { Payment, PaymentType } from "@repo/database";
 import { paymentFormSchema } from "@/schemas/forms/payment-form-schema";
 import { addPayment, updatePayment } from "@/server/actions/payments";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
 
 const PaymentForm = ({
   payment,

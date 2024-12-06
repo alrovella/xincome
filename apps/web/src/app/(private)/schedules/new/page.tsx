@@ -1,8 +1,8 @@
 import { getDefaultBusinessHours } from "@/server/queries/schedules";
 import NotFound from "@/app/not-found";
 import { getLoggedInUser } from "@/server/queries/users";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import UpgradePlanLink from "@/components/common/upgrade-plan-link";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import UpgradePlanLink from "@/components/common/UpgradePlanLink";
 import ScheduleForm from "../_components/schedule-form";
 import { Container } from "@repo/ui/components/ui/container";
 

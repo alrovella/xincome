@@ -20,7 +20,7 @@ import {
 import AppointmentFriendlyDatetimeLabel from "./appointment-friendly-datetime-label";
 import type { ExtendedAppointment } from "@/types/entities/appointment";
 import { formatPrice } from "@/util/utils";
-import { useAppUser } from "@/providers/user-provider";
+import { useAppUser } from "@/providers/UserContextProvider";
 
 const CustomerAppointmentCard = ({
   initialAppointment,

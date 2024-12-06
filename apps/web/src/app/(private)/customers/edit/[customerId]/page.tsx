@@ -3,7 +3,7 @@ import CustomerForm from "../../_components/customers-form";
 import NotFound from "../not-found";
 import { getCustomerById } from "@/server/queries/customers";
 import { Suspense } from "react";
-import FormSkeleton from "@/components/common/skeletons/form-skeleton";
+import FormSkeleton from "@/components/common/skeletons/FormSkeleton";
 
 export default async function EditCustomerPage({
   params,

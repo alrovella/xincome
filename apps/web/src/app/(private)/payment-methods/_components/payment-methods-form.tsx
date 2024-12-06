@@ -9,14 +9,14 @@ import type { CompanyPaymentMethod, PaymentMethod } from "@repo/database";
 import { Label } from "@repo/ui/components/ui/label";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
-import { useAppUser } from "@/providers/user-provider";
+import { useAppUser } from "@/providers/UserContextProvider";
 import {
   type PaymentMethodForForms,
   paymentMethodSchema,
 } from "@/schemas/forms/payment-method-form-schema";
 import { updatePaymentMethods } from "@/server/actions/payment-methods";
-import FormFooter from "@/components/common/forms/form-footer";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormFooter from "@/components/common/forms/FormFooter";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 
 const PaymentMethodsForm = ({
   defaultPaymentMethods,

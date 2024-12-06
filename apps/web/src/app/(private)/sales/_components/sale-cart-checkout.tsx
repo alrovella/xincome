@@ -25,10 +25,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select";
-import CartTable from "@/components/common/cart-table";
+import CartTable from "@/components/common/CartTable";
 import { formatPrice } from "@/util/utils";
 import { useSaleStore } from "@/hooks/stores/useSaleStore";
-import FormFooter from "@/components/common/forms/form-footer";
+import FormFooter from "@/components/common/forms/FormFooter";
 import { useRouter } from "next/navigation";
 import { useBankAccounts } from "@/hooks/queries/useBankAccounts";
 import { useForm } from "react-hook-form";
@@ -45,7 +45,7 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import { useState } from "react";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import { Textarea } from "@repo/ui/components/ui/textarea";
 import {
   Command,

@@ -10,13 +10,13 @@ import {
 import { Cog, PencilLine } from "lucide-react";
 import Link from "next/link";
 import { useGetServices } from "@/hooks/queries/useGetServices";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { formatPrice } from "@/util/utils";
 import toast from "react-hot-toast";
 import { deleteService } from "@/server/actions/services";
-import DeleteAlertDialog from "@/components/common/delete-alert-dialog";
+import DeleteAlertDialog from "@/components/common/DeleteAlertDialog";
 
 const ServiceTable = () => {
   const {

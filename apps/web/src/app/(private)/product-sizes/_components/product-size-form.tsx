@@ -2,7 +2,7 @@
 import { Input } from "@repo/ui/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/ui/components/ui/button";
-import FormFooter from "@/components/common/forms/form-footer";
+import FormFooter from "@/components/common/forms/FormFooter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -15,14 +15,14 @@ import {
   FormControl,
   FormMessage,
 } from "@repo/ui/components/ui/form";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import type { ProductSize } from "@repo/database";
 import { productSizeFormSchema } from "@/schemas/forms/productSize-form-schema";
 import {
   addProductSize,
   updateProductSize,
 } from "@/server/actions/product-sizes";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
 
 const ProductSizeForm = ({
   productSize,

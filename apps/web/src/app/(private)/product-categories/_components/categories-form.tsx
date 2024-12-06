@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
-import FormFooter from "@/components/common/forms/form-footer";
+import FormFooter from "@/components/common/forms/FormFooter";
 import {
   Form,
   FormControl,
@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import toast from "react-hot-toast";
 import { categoryFormSchema } from "@/schemas/forms/category-form-schema";
 import {
@@ -24,7 +24,7 @@ import {
   updateCategory,
 } from "@/server/actions/product-categories";
 import type { ProductCategory } from "@repo/database";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
 
 const CategoryForm = ({ category }: { category?: ProductCategory }) => {
   const router = useRouter();

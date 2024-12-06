@@ -19,10 +19,10 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { BotIcon } from "lucide-react";
 import { serviceFormSchema } from "@/schemas/forms/service-form-schema";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
-import FormFooter from "@/components/common/forms/form-footer";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
+import FormFooter from "@/components/common/forms/FormFooter";
 import { updateService, createService } from "@/server/actions/services";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import { askAIForHelp } from "@/server/queries/ai";
 
 const ServiceForm = ({ service }: { service?: Service | null }) => {

@@ -1,7 +1,7 @@
-import ReactQueryProvider from "@/providers/react-query-provider"
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
-  return <ReactQueryProvider>{children}</ReactQueryProvider>
-}
+  return <ReactQueryProvider>{children}</ReactQueryProvider>;
+};
 
-export default PublicLayout
+export default PublicLayout;

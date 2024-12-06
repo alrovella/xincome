@@ -25,7 +25,7 @@ import {
   DrawerFooter,
   DrawerClose,
 } from "@repo/ui/components/ui/drawer";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 
 const NO_APPOINTMENTS = "No hay turnos de acuerdo a tu búsqueda";
 const NO_APPOINTMENTS_INSTRUCTIONS =

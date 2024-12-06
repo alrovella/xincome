@@ -1,5 +1,5 @@
 "use client";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import type { Schedule } from "@repo/database";
 import {
   AlertDialog,

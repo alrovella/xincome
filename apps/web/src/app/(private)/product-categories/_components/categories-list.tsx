@@ -1,7 +1,7 @@
 "use client";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { useCategories } from "@/hooks/queries/useCategories";
 import {
   Table,
@@ -14,7 +14,7 @@ import {
 import { Pencil, ShoppingBag } from "lucide-react";
 import { deleteCategory } from "@/server/actions/product-categories";
 import toast from "react-hot-toast";
-import DeleteAlertDialog from "@/components/common/delete-alert-dialog";
+import DeleteAlertDialog from "@/components/common/DeleteAlertDialog";
 import { useTransition } from "react";
 
 const CategoryList = () => {

@@ -52,7 +52,7 @@ import {
 import { X } from "lucide-react";
 import { useAppointment } from "@/hooks/queries/useAppointments";
 import { paymentFormSchema } from "@/schemas/forms/payment-form-schema";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import { formatPrice } from "@/util/utils";
 import { AppointmentCard } from "@/app/(private)/appointments/_components/appointment-card";
 import { addPayment, cancelPayment } from "@/server/actions/payments";
@@ -64,7 +64,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@repo/ui/components/ui/select";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 
 const PaymentForm = ({ appointmentId }: { appointmentId: string }) => {
   const {

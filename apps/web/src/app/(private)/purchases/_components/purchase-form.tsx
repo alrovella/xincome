@@ -1,7 +1,7 @@
 import NotFound from "@/app/not-found";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
-import FormFooter from "@/components/common/forms/form-footer";
-import TotalSummary from "@/components/common/total-summary";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
+import FormFooter from "@/components/common/forms/FormFooter";
+import TotalSummary from "@/components/common/TotalSummary";
 import { getPurchase } from "@/server/queries/purchases";
 import { formatPrice } from "@/util/utils";
 import { buttonVariants } from "@repo/ui/components/ui/button";
@@ -71,7 +71,7 @@ const PurchaseForm = async ({ purchaseId }: { purchaseId: number }) => {
                 {item.productSize?.name}
               </TableCell>
               <TableCell className="text-center">{item.quantity}</TableCell>
-              <TableCell className="hidden sm:table-cell text-right">
+              <TableCell className="text-right hidden sm:table-cell">
                 {formatPrice(item.cost)}
               </TableCell>
             </TableRow>

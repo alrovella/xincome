@@ -2,7 +2,7 @@ import { Container } from "@repo/ui/components/ui/container";
 import PaymentsList from "../_components/payments-list";
 import { getPluralPaymentType } from "@/util/utils";
 import { PaymentType } from "@repo/database";
-import PrimaryLink from "@/components/common/links/primary-link";
+import PrimaryLink from "@/components/common/links/PrimaryLink";
 
 export default async function Page({
   params,

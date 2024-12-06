@@ -8,12 +8,12 @@ import {
   TableHead,
   TableHeader,
 } from "@repo/ui/components/ui/table";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import SecondaryLink from "@/components/common/links/secondary-link";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import { Pencil, Ruler } from "lucide-react";
 import { useProductSizes } from "@/hooks/queries/useProductSizes";
-import DeleteAlertDialog from "@/components/common/delete-alert-dialog";
+import DeleteAlertDialog from "@/components/common/DeleteAlertDialog";
 import toast from "react-hot-toast";
 import { deleteProductSize } from "@/server/actions/product-sizes";
 import { useTransition } from "react";

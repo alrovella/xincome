@@ -7,18 +7,18 @@ import {
   TableHead,
   TableHeader,
 } from "@repo/ui/components/ui/table";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { useBankAccounts } from "@/hooks/queries/useBankAccounts";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import { Landmark, Pencil } from "lucide-react";
 import { deleteBankAccount } from "@/server/actions/bank-accounts";
 import toast from "react-hot-toast";
-import DeleteAlertDialog from "@/components/common/delete-alert-dialog";
+import DeleteAlertDialog from "@/components/common/DeleteAlertDialog";
 import { useTransition } from "react";
 
 const BankAccountList = () => {
-  const { data, isLoading, isRefetching, refetch } = useBankAccounts();
+  const { data, refetch, fetchStatus } = useBankAccounts();
   const [isDeleting, deleteTransition] = useTransition();
 
   const handleDelete = async (id: number) => {
@@ -36,7 +36,7 @@ const BankAccountList = () => {
 
   return (
     <>
-      {isLoading || isRefetching || isDeleting ? (
+      {fetchStatus === "fetching" || isDeleting ? (
         <ListSkeleton />
       ) : (
         <>

@@ -24,7 +24,7 @@ import {
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/components/ui/button";
 import { useRouter } from "next/navigation";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function NavUser() {
   const { setOpenMobile, isMobile } = useSidebar();

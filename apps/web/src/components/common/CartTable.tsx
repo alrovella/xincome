@@ -13,7 +13,7 @@ import {
   TableCell,
 } from "@repo/ui/components/ui/table";
 import { ShoppingBasket, X } from "lucide-react";
-import EmptyStateAlert from "./empty-state-alert";
+import EmptyStateAlert from "./EmptyStateAlert";
 
 const CartTable = ({
   isPurchase,

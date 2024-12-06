@@ -6,14 +6,14 @@ import type { useQueryOptions } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 
 export function useBankAccounts() {
-  const { isLoading, error, data, isRefetching, refetch } = useQuery({
+  const { error, data, refetch, fetchStatus } = useQuery({
     queryKey: ["getAllBankAccounts"],
     queryFn: () => getAllBankAccounts(),
     staleTime: 1800,
     gcTime: 1800,
   });
 
-  return { isLoading, error, data, isRefetching, refetch };
+  return { error, data, refetch, fetchStatus };
 }
 
 type bankAccountsOptions = useQueryOptions & {

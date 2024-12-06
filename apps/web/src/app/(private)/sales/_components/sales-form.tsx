@@ -11,7 +11,7 @@ import { Textarea } from "@repo/ui/components/ui/textarea";
 import { format } from "date-fns";
 import { formatPrice } from "@/util/utils";
 import { Button } from "@repo/ui/components/ui/button";
-import TotalSummary from "@/components/common/total-summary";
+import TotalSummary from "@/components/common/TotalSummary";
 import { useRouter } from "next/navigation";
 import type { ExtendedSale } from "@/types/entities/sales";
 import { saleEditFormSchema } from "@/schemas/forms/sale-form-schema";
@@ -125,7 +125,7 @@ const SaleForm = ({ sale }: { sale: ExtendedSale }) => {
                   {" "}
                   {formatPrice(item.price)}
                 </TableCell>
-                <TableCell className="hidden sm:table-cell text-right">
+                <TableCell className="text-right hidden sm:table-cell">
                   {formatPrice(item.price * item.quantity)}
                 </TableCell>
               </TableRow>

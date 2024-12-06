@@ -1,6 +1,6 @@
 "use client";
 
-import CartTable from "@/components/common/cart-table";
+import CartTable from "@/components/common/CartTable";
 import { usePurchaseStore } from "@/hooks/stores/usePurchaseStore";
 import {
   AlertDialog,

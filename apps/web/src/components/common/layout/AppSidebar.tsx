@@ -21,11 +21,11 @@ import {
   useSidebar,
 } from "@repo/ui/components/ui/sidebar";
 import Link from "next/link";
-import { NavMain } from "./nav-main";
-import { NavSecondary } from "./nav-secondary";
-import { NavUser } from "./nav-user";
-import Logo from "../logo";
-import { useAppUser } from "@/providers/user-provider";
+import { NavMain } from "./NavMain";
+import { NavSecondary } from "./NavSecondary";
+import { NavUser } from "./NavUser";
+import Logo from "../Logo";
+import { useAppUser } from "@/providers/UserContextProvider";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { setOpenMobile, isMobile } = useSidebar();

@@ -1,4 +1,4 @@
-import Logo from "@/components/common/logo";
+import Logo from "@/components/common/Logo";
 import { getLoggedInUser } from "@/server/queries/users";
 import { buttonVariants } from "@repo/ui/components/ui/button";
 import { cn } from "@repo/ui/lib/utils";

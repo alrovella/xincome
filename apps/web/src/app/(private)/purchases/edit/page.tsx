@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import PurchaseForm from "../_components/purchase-form";
-import FormSkeleton from "@/components/common/skeletons/form-skeleton";
+import FormSkeleton from "@/components/common/skeletons/FormSkeleton";
 import { Container } from "@repo/ui/components/ui/container";
 
 export default async function Page({

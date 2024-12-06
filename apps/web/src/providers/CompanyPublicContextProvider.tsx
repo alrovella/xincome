@@ -5,7 +5,7 @@ import { createContext, useContext } from "react";
 
 const CompanyPublicContext = createContext<ExtendedCompany | null>(null);
 
-export const CompanySlugContextProvider = ({
+export const CompanyPublicContextProvider = ({
   children,
   value,
 }: {

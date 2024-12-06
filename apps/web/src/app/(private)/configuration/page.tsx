@@ -1,7 +1,7 @@
 import { Container } from "@repo/ui/components/ui/container";
 import ConfigurationForm from "./_components/configuration-form";
 import { Suspense } from "react";
-import FormSkeleton from "@/components/common/skeletons/form-skeleton";
+import FormSkeleton from "@/components/common/skeletons/FormSkeleton";
 import { getLoggedInCompany } from "@/server/queries/companies";
 import { notFound } from "next/navigation";
 

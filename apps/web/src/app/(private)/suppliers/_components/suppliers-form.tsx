@@ -6,7 +6,7 @@ import { supplierFormSchema } from "@/schemas/forms/supplier-form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
-import FormFooter from "@/components/common/forms/form-footer";
+import FormFooter from "@/components/common/forms/FormFooter";
 import {
   Form,
   FormControl,
@@ -16,10 +16,10 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import { addSupplier, updateSupplier } from "@/server/actions/suppliers";
 import toast from "react-hot-toast";
-import EntityDatesInfo from "@/components/common/entity-dates-info";
+import EntityDatesInfo from "@/components/common/EntityDatesInfo";
 import { Textarea } from "@repo/ui/components/ui/textarea";
 import InputPhone from "@repo/ui/components/ui/phone-input";
 

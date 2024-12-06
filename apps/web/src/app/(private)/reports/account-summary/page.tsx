@@ -1,4 +1,4 @@
-import EmptyStateAlert from "@/components/common/empty-state-alert";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 import { getAllBankAccounts } from "@/server/queries/bank-accounts";
 import { getLoggedInUser } from "@/server/queries/users";
 import { formatPrice } from "@/util/utils";

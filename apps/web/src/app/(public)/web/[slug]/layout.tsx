@@ -13,7 +13,7 @@ import { es } from "date-fns/locale";
 import genericHeaderImage from "@/assets/images/generic-header-image.jpg";
 import ButtonsNav from "../../_components/company-page/buttons-nav";
 import type { Metadata } from "next";
-import { CompanySlugContextProvider } from "@/providers/company-public-provider";
+import { CompanyPublicContext } from "@/providers/CompanyPublicContextProvider";
 import { getInitials } from "@/util/utils";
 
 export const generateMetadata = async (
@@ -43,7 +43,7 @@ const PublicLayout = async (props: LayoutProps) => {
   if (!company) return NotFound();
 
   return (
-    <CompanySlugContextProvider value={company}>
+    <CompanyPublicContext value={company}>
       <div className="bg-white mx-auto rounded-lg w-full max-w-3xl h-screen">
         <div className="relative">
           <img
@@ -94,7 +94,7 @@ const PublicLayout = async (props: LayoutProps) => {
         <hr className="my-2" />
         <div className="mt-4 px-2">{children}</div>
       </div>
-    </CompanySlugContextProvider>
+    </CompanyPublicContext>
   );
 };
 

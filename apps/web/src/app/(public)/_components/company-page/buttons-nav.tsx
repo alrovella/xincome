@@ -1,24 +1,24 @@
-"use client"
-import { CalendarPlus, Earth, Send } from "lucide-react"
-import { Button, buttonVariants } from "@repo/ui/components/ui/button"
-import Link from "next/link"
-import { cn } from "@repo/ui/lib/utils"
+"use client";
+import { CalendarPlus, Earth, Send } from "lucide-react";
+import { Button, buttonVariants } from "@repo/ui/components/ui/button";
+import Link from "next/link";
+import { cn } from "@repo/ui/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@repo/ui/components/ui/dropdown-menu"
-import NewAppointmentForm from "@/app/(public)/_components/company-page/new-appointment-form"
-import { useCompanyPublic } from "@/providers/company-public-provider"
-import { useMediaQuery } from "@/hooks/useMediaQuery"
+} from "@repo/ui/components/ui/dropdown-menu";
+import NewAppointmentForm from "@/app/(public)/_components/company-page/new-appointment-form";
+import { useCompanyPublic } from "@/providers/CompanyPublicContextProvider";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@repo/ui/components/ui/dialog"
+} from "@repo/ui/components/ui/dialog";
 import {
   Drawer,
   DrawerTrigger,
@@ -27,12 +27,12 @@ import {
   DrawerTitle,
   DrawerFooter,
   DrawerClose,
-} from "@repo/ui/components/ui/drawer"
+} from "@repo/ui/components/ui/drawer";
 
 const ButtonsNav = () => {
-  const company = useCompanyPublic()
-  const customMessageUrl = `https://wa.me/${company.phone}?text=Hola!`
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const company = useCompanyPublic();
+  const customMessageUrl = `https://wa.me/${company.phone}?text=Hola!`;
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
     <>
@@ -132,7 +132,7 @@ const ButtonsNav = () => {
         </>
       ) : null}
     </>
-  )
-}
+  );
+};
 
-export default ButtonsNav
+export default ButtonsNav;

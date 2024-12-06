@@ -1,7 +1,7 @@
-import { buttonVariants } from "@repo/ui/components/ui/button"
-import { cn } from "@repo/ui/lib/utils"
-import { Sparkles } from "lucide-react"
-import Link from "next/link"
+import { buttonVariants } from "@repo/ui/components/ui/button";
+import { cn } from "@repo/ui/lib/utils";
+import { Sparkles } from "lucide-react";
+import Link from "next/link";
 
 const UpgradePlanLink = () => {
   return (
@@ -15,7 +15,7 @@ const UpgradePlanLink = () => {
       <Sparkles className="size-4" />
       Actualizar Plan
     </Link>
-  )
-}
+  );
+};
 
-export default UpgradePlanLink
+export default UpgradePlanLink;

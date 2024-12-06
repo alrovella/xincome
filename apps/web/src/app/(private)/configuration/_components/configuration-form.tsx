@@ -27,7 +27,7 @@ import {
 import { useRouter } from "next/navigation";
 import { Progress } from "@repo/ui/components/ui/progress";
 import { useRef, useState } from "react";
-import { useEdgeStore } from "@/providers/edgestore-provider";
+import { useEdgeStore } from "@/providers/EdgeStoreProvider";
 import {
   Select,
   SelectContent,
@@ -42,10 +42,10 @@ import { useGetCategories } from "@/hooks/queries/useGetCategories";
 import { configurationFormSchema } from "@/schemas/forms/configuration-form";
 import { Textarea } from "@repo/ui/components/ui/textarea";
 import { getProvinces } from "@/util/utils";
-import FormFooter from "@/components/common/forms/form-footer";
+import FormFooter from "@/components/common/forms/FormFooter";
 import { updateCompany } from "@/server/actions/company";
-import { HelpDialog } from "@/components/common/help-dialog";
-import FormErrorsAlert from "@/components/common/forms/form-errors-alert";
+import { HelpDialog } from "@/components/common/HelpDialog";
+import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import type { ExtendedCompany } from "@/types/entities/companies";
 import InputPhone from "@repo/ui/components/ui/phone-input";
 const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {

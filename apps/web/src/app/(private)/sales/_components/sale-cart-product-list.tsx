@@ -7,10 +7,10 @@ import {
   TableRow,
 } from "@repo/ui/components/ui/table";
 import { useProducts } from "@/hooks/queries/useProducts";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import { useSaleStore } from "@/hooks/stores/useSaleStore";
 import SaleCartProductListItem from "@/app/(private)/sales/_components/sale-cart-product-list-item";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 const SaleCartProductList = () => {
   const { supplierId } = useSaleStore();
 

@@ -4,13 +4,13 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@repo/ui/components/ui/sidebar";
-import ReactQueryProvider from "@/providers/react-query-provider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { Toaster } from "react-hot-toast";
 import { getLoggedInUser } from "@/server/queries/users";
 import { RedirectToSignIn } from "@clerk/nextjs";
-import { UserContextProvider } from "@/providers/user-provider";
+import { UserContextProvider } from "@/providers/UserContextProvider";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { AppSidebar } from "@/components/common/layout/app-sidebar";
+import { AppSidebar } from "@/components/common/layout/AppSidebar";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_APP_NAME,

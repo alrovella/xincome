@@ -3,7 +3,7 @@ import SaleForm from "../_components/sales-form";
 import { getSale } from "@/server/queries/sales";
 import { Container } from "@repo/ui/components/ui/container";
 import { Suspense } from "react";
-import FormSkeleton from "@/components/common/skeletons/form-skeleton";
+import FormSkeleton from "@/components/common/skeletons/FormSkeleton";
 
 export default async function Page({
   searchParams,

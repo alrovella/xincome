@@ -12,11 +12,11 @@ import { Badge } from "@repo/ui/components/ui/badge";
 import { Pencil, ShoppingCart, X } from "lucide-react";
 import { useSales } from "@/hooks/queries/useSales";
 import { useSearchParams } from "next/navigation";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 import { format } from "date-fns";
 import { formatPrice } from "@/util/utils";
-import SecondaryLink from "@/components/common/links/secondary-link";
+import SecondaryLink from "@/components/common/links/SecondaryLink";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -115,7 +115,7 @@ const SaleList = () => {
                     <TableCell className="hidden md:table-cell">
                       {sale.bankAccountName}
                     </TableCell>
-                    <TableCell className="hidden md:table-cell text-sm">
+                    <TableCell className="hidden text-sm md:table-cell">
                       {sale.customerName}
                     </TableCell>
 
@@ -166,10 +166,10 @@ const SaleList = () => {
                   <TableCell className="font-medium">
                     Cantidad: {data?.length}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell text-sm">
+                  <TableCell className="hidden text-sm md:table-cell">
                     {" "}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell text-center">
+                  <TableCell className="hidden text-center md:table-cell">
                     {" "}
                   </TableCell>
                   <TableCell className="text-right">

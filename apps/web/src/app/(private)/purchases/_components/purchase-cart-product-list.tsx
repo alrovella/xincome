@@ -9,9 +9,9 @@ import {
 } from "@repo/ui/components/ui/table";
 import { useProducts } from "@/hooks/queries/useProducts";
 import { usePurchaseStore } from "@/hooks/stores/usePurchaseStore";
-import ListSkeleton from "@/components/common/skeletons/list-skeleton";
+import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import PurchaseCartProductListItem from "./purchase-cart-product-list-item";
-import EmptyStateAlert from "@/components/common/empty-state-alert";
+import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 const PurchaseCartProductList = () => {
   const { supplierId } = usePurchaseStore();
 

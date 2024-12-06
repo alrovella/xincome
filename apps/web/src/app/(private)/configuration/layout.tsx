@@ -1,4 +1,4 @@
-import { EdgeStoreProvider } from "@/providers/edgestore-provider";
+import { EdgeStoreProvider } from "@/providers/EdgeStoreProvider";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

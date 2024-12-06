@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
 } from "@repo/ui/components/ui/dropdown-menu";
 import { useSchedules } from "@/hooks/queries/useSchedule";
-import NavLink from "@/components/common/layout/nav-link";
+import NavLink from "@/components/common/layout/NavLink";
 
 const NewAppointmentButton = ({ className }: { className?: string }) => {
   const { data: schedules } = useSchedules();

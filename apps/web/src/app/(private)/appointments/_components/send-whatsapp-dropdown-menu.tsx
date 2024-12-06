@@ -1,5 +1,5 @@
 "use client";
-import { useAppUser } from "@/providers/user-provider";
+import { useAppUser } from "@/providers/UserContextProvider";
 import type { ExtendedAppointment } from "@/types/entities/appointment";
 import { formatFriendlyDateTime } from "@/util/formatters";
 import { formatPrice } from "@/util/utils";
