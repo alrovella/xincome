@@ -5,7 +5,7 @@ import { cn } from "@repo/ui/lib/utils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function Page() {
+export default function Page() {
   const user = await getLoggedInUser();
   if (user) return redirect("/dashboard");
   return (

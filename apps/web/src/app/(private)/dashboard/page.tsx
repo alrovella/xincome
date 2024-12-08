@@ -3,7 +3,7 @@ import { addMonths, endOfMonth, startOfMonth } from "date-fns";
 import CustomerBirthdaysCard from "./_components/customer-birthdays-card";
 import FrequentCustomersCard from "./_components/frequent-customers-card";
 
-export default async function Page() {
+export default function Page() {
   return (
     <>
       <div className="gap-4 grid lg:grid-cols-5 mb-4">

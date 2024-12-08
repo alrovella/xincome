@@ -7,7 +7,7 @@ import { Container } from "@repo/ui/components/ui/container";
 import { Suspense } from "react";
 import FormSkeleton from "@/components/common/skeletons/FormSkeleton";
 
-export default async function ConfigurationPage() {
+export default async function Page() {
   const paymentmethods = await getPaymentMethods();
   const selectedPaymentMethods = await getPaymentMethodsByCompany();
   return (

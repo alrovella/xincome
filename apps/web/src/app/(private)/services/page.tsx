@@ -3,7 +3,7 @@ import ServiceTable from "./_components/service-table";
 import { Container } from "@repo/ui/components/ui/container";
 import PrimaryLink from "@/components/common/links/PrimaryLink";
 
-export default async function ServicesPage() {
+export default function Page() {
   return (
     <Container
       title="Servicios"

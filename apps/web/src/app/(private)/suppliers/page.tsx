@@ -2,7 +2,7 @@ import { Container } from "@repo/ui/components/ui/container";
 import SupplierList from "./_components/suppliers-list";
 import PrimaryLink from "@/components/common/links/PrimaryLink";
 
-export default async function Page() {
+export default function Page() {
   return (
     <Container
       title="Proveedores"

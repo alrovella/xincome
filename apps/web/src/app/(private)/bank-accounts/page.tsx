@@ -2,7 +2,7 @@ import { Container } from "@repo/ui/components/ui/container";
 import BankAccountList from "./_components/bank-account-list";
 import PrimaryLink from "@/components/common/links/PrimaryLink";
 
-export default async function Page() {
+export default function Page() {
   return (
     <Container
       title="Cuentas Bancarias"

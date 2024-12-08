@@ -2,7 +2,7 @@ import { Container } from "@repo/ui/components/ui/container";
 import ProductSizeList from "./_components/product-size-list";
 import PrimaryLink from "@/components/common/links/PrimaryLink";
 
-export default async function Page() {
+export default function Page() {
   return (
     <Container
       title="Talles"

@@ -11,7 +11,7 @@ import PurchaseCartProductList from "@/app/(private)/purchases/_components/purch
 import PurchaseSupplierSelect from "@/app/(private)/purchases/_components/purchase-supplier-select";
 import { Container } from "@repo/ui/components/ui/container";
 
-export default async function Page() {
+export default function Page() {
   return (
     <Container title="Nueva Compra">
       <Tabs defaultValue="products">

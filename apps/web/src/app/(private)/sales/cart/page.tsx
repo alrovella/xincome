@@ -11,7 +11,7 @@ import SaleCartProductList from "../_components/sale-cart-product-list";
 import SaleSupplierSelect from "../_components/sale-supplier-select";
 import { Container } from "@repo/ui/components/ui/container";
 
-export default async function Page() {
+export default function Page() {
   return (
     <Container title="Nueva Venta">
       <Tabs defaultValue="products">

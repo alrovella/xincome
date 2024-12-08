@@ -1,6 +1,6 @@
 import { Container } from "@repo/ui/components/ui/container";
 
-export default async function Page() {
+export default function Page() {
   return (
     <Container title="Feedback">
       <h2 className="mb-4 font-semibold text-2xl">

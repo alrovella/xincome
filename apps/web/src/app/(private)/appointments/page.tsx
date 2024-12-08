@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Listado y administracion de turnos",
 };
 
-export default async function AppointmentsPage() {
+export default function Page() {
   return (
     <Container title="Turnos" headerChildren={<NewAppointmentButton />}>
       <AppointmentList />
