@@ -3,7 +3,7 @@ import type { ExtendedCompany } from "@/types/entities/companies";
 import type React from "react";
 import { createContext, useContext } from "react";
 
-const CompanyPublicContext = createContext<ExtendedCompany | null>(null);
+export const CompanyPublicContext = createContext<ExtendedCompany | null>(null);
 
 export const CompanyPublicContextProvider = ({
   children,

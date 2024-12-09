@@ -1,8 +1,8 @@
-import { getWebCompanyCategories } from "@/server/queries/categories"
+import { getWebCompanyCategories } from "@/server/queries/company-categories";
 
 const Categories = async () => {
-  const categories = await getWebCompanyCategories()
-  if (!categories) return null
+  const categories = await getWebCompanyCategories();
+  if (!categories) return null;
 
   return (
     <ul className="gap-6 space-y-4 grid lg:grid-cols-3 text-gray-800">
@@ -15,7 +15,7 @@ const Categories = async () => {
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;

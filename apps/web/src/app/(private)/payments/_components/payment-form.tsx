@@ -38,7 +38,7 @@ const PaymentForm = ({
   paymentType: PaymentType;
 }) => {
   const router = useRouter();
-  const { data: bankAccounts, isLoading: isLoadingBankAccounts } =
+  const { data: bankAccounts, fetchStatus: fetchStatsBankAccounts } =
     useBankAccounts();
 
   const form = useForm<z.infer<typeof paymentFormSchema>>({
@@ -107,7 +107,7 @@ const PaymentForm = ({
 
         <FormField
           control={form.control}
-          disabled={isLoadingBankAccounts}
+          disabled={fetchStatsBankAccounts === "fetching"}
           name="bankAccountId"
           render={({ field }) => (
             <FormItem>
@@ -167,7 +167,10 @@ const PaymentForm = ({
           </Button>
           <Button
             type="submit"
-            disabled={form.formState.isSubmitting || isLoadingBankAccounts}
+            disabled={
+              form.formState.isSubmitting ||
+              fetchStatsBankAccounts === "fetching"
+            }
           >
             Guardar
           </Button>

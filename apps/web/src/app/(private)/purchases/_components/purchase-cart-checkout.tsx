@@ -40,7 +40,8 @@ import { Landmark } from "lucide-react";
 const PurchaseCartCheckout = () => {
   const router = useRouter();
 
-  const { data: bankAccounts, isLoading } = useBankAccounts();
+  const { data: bankAccounts, fetchStatus: fetchStatusBankAccounts } =
+    useBankAccounts();
 
   const { items, subTotal, total, clearItems, supplierId } = usePurchaseStore();
 
@@ -138,55 +139,57 @@ const PurchaseCartCheckout = () => {
           <h3 className="mb-4 font-bold">
             Asignar valores a Cuentas Bancarias
           </h3>
-          {isLoading && <ListSkeleton />}
-          {!isLoading && bankAccountTransactions.length === 0 && (
-            <EmptyStateAlert className="gap-4">
-              <div className="flex flex-col justify-center items-center gap-2">
-                <Landmark className="size-8" />
-                <h2 className="font-bold">No hay cuentas bancarias</h2>
-                <div>Agrega una cuenta bancaria para realizar la compra</div>
-              </div>
-              <PrimaryLink href="/bank-accounts/edit">
-                Agregar Cuenta Bancaria
-              </PrimaryLink>
-            </EmptyStateAlert>
-          )}
-          {!isLoading && bankAccountTransactions.length > 0 && (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Cuentas Bancaria</TableHead>
-                  <TableHead className="text-right">Monto</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {bankAccountTransactions?.map(
-                  (bankAccountTransaction, index) => (
-                    <TableRow key={bankAccountTransaction.id}>
-                      <TableCell className="w-[60%]">
-                        {bankAccountTransaction.bankAccountName}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Input
-                          value={form.watch(
-                            `bankAccountTransactions.${index}.amount`
-                          )}
-                          onChange={(e) => {
-                            form.setValue(
-                              `bankAccountTransactions.${index}.amount`,
-                              Number(e.target.value)
-                            );
-                          }}
-                          type="text"
-                          className="text-right"
-                        />
-                      </TableCell>
-                    </TableRow>
-                  )
-                )}
-              </TableBody>
-            </Table>
-          )}
+          {fetchStatusBankAccounts === "fetching" && <ListSkeleton />}
+          {fetchStatusBankAccounts === "idle" &&
+            bankAccountTransactions.length === 0 && (
+              <EmptyStateAlert className="gap-4">
+                <div className="flex flex-col justify-center items-center gap-2">
+                  <Landmark className="size-8" />
+                  <h2 className="font-bold">No hay cuentas bancarias</h2>
+                  <div>Agrega una cuenta bancaria para realizar la compra</div>
+                </div>
+                <PrimaryLink href="/bank-accounts/edit">
+                  Agregar Cuenta Bancaria
+                </PrimaryLink>
+              </EmptyStateAlert>
+            )}
+          {fetchStatusBankAccounts === "idle" &&
+            bankAccountTransactions.length > 0 && (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Cuentas Bancaria</TableHead>
+                    <TableHead className="text-right">Monto</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {bankAccountTransactions?.map(
+                    (bankAccountTransaction, index) => (
+                      <TableRow key={bankAccountTransaction.id}>
+                        <TableCell className="w-[60%]">
+                          {bankAccountTransaction.bankAccountName}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Input
+                            value={form.watch(
+                              `bankAccountTransactions.${index}.amount`
+                            )}
+                            onChange={(e) => {
+                              form.setValue(
+                                `bankAccountTransactions.${index}.amount`,
+                                Number(e.target.value)
+                              );
+                            }}
+                            type="text"
+                            className="text-right"
+                          />
+                        </TableCell>
+                      </TableRow>
+                    )
+                  )}
+                </TableBody>
+              </Table>
+            )}
 
           <FormField
             control={form.control}

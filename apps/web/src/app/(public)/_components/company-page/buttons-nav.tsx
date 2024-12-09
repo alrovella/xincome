@@ -31,7 +31,7 @@ import {
 
 const ButtonsNav = () => {
   const company = useCompanyPublic();
-  const customMessageUrl = `https://wa.me/${company.phone}?text=Hola!`;
+  const customMessageUrl = `https://wa.me/${company.phoneNumber}?text=Hola!`;
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (

@@ -68,7 +68,8 @@ import toast from "react-hot-toast";
 
 export default function SaleCartCheckout() {
   const router = useRouter();
-  const { data: bankAccounts, isLoading } = useBankAccounts();
+  const { data: bankAccounts, fetchStatus: fetchStatusBankAccounts } =
+    useBankAccounts();
   const { total, items, subTotal, clearItems, saleType, setSaleType } =
     useSaleStore();
 
@@ -205,7 +206,7 @@ export default function SaleCartCheckout() {
                       <FormLabel>Cuenta Bancaria</FormLabel>
                       <FormControl>
                         <Select
-                          disabled={isLoading}
+                          disabled={fetchStatusBankAccounts === "fetching"}
                           value={field.value ? String(field.value) : ""}
                           onValueChange={(e) => {
                             field.onChange(e);

@@ -94,7 +94,7 @@ const PaymentForm = ({ appointmentId }: { appointmentId: string }) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [savePaymentTimes, setSavePaymentTimes] = useState(0);
 
-  const { data: bankAccounts, isLoading: isLoadingBankAccounts } =
+  const { data: bankAccounts, fetchStatus: fetchStatusBankAccounts } =
     useBankAccounts();
 
   const [isCancelling, startCancellationTransition] = useTransition();
@@ -328,7 +328,7 @@ const PaymentForm = ({ appointmentId }: { appointmentId: string }) => {
                     <FormLabel>Cuenta Bancaria</FormLabel>
                     <FormControl>
                       <Select
-                        disabled={isLoadingBankAccounts}
+                        disabled={fetchStatusBankAccounts === "fetching"}
                         value={field.value ? String(field.value) : undefined}
                         onValueChange={(e) => {
                           field.onChange(e);

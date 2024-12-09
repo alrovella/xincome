@@ -13,8 +13,8 @@ import { es } from "date-fns/locale";
 import genericHeaderImage from "@/assets/images/generic-header-image.jpg";
 import ButtonsNav from "../../_components/company-page/buttons-nav";
 import type { Metadata } from "next";
-import { CompanyPublicContext } from "@/providers/CompanyPublicContextProvider";
 import { getInitials } from "@/util/utils";
+import { CompanyPublicContext } from "@/providers/CompanyPublicContextProvider";
 
 export const generateMetadata = async (
   props: LayoutProps
