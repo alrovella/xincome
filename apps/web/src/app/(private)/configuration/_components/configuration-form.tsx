@@ -16,13 +16,13 @@ import { Input } from "@repo/ui/components/ui/input";
 import toast from "react-hot-toast";
 import { Button } from "@repo/ui/components/ui/button";
 import {
+  Cog,
   Globe,
   ImageIcon,
   Images,
   MapPin,
   Phone,
   Share2,
-  User,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Progress } from "@repo/ui/components/ui/progress";
@@ -130,7 +130,7 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
       >
         <FormGroupSection>
           <FormGroupHeader>
-            <User className="mr-2 text-primary" /> GENERAL
+            <Cog className="mr-2 text-primary" /> GENERAL
           </FormGroupHeader>
           <FormFieldContainer>
             <FormField
@@ -632,7 +632,7 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
           <FormGroupHeader>
             <Phone className="mr-2 text-primary" /> DATOS DE CONTACTO
           </FormGroupHeader>
-          <FormFieldContainer>
+          <FormFieldContainer className="md:grid-cols-3">
             <FormField
               control={form.control}
               name="whatsapp"

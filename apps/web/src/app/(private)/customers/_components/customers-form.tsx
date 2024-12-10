@@ -33,7 +33,7 @@ import {
   SelectValue,
 } from "@repo/ui/components/ui/select";
 import { Country, State, City } from "country-state-city";
-import { MapPin } from "lucide-react";
+import { MapPin, Phone, User } from "lucide-react";
 import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
 import FormFieldContainer from "@/components/common/layout/form/FormFieldContainer";
 import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
@@ -86,85 +86,84 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
         className="flex flex-col gap-6"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nombre Completo</FormLabel>
-              <FormControl>
-                <Input {...field} type="text" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <FormGroupSection>
+          <FormGroupHeader>
+            <User className="mr-2 text-primary" /> GENERAL
+          </FormGroupHeader>
+          <FormFieldContainer>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nombre Completo</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="text" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name="phoneNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Teléfono</FormLabel>
-              <FormControl>
-                <InputPhone
-                  {...field}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="birthdate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Cumpleaños</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="date"
+                      onChange={field.onChange}
+                      value={String(field.value)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FormFieldContainer>
+        </FormGroupSection>
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input {...field} type="text" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <FormGroupSection>
+          <FormGroupHeader>
+            <Phone className="mr-2 text-primary" /> DATOS DE CONTACTO
+          </FormGroupHeader>
+          <FormFieldContainer>
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Teléfono</FormLabel>
+                  <FormControl>
+                    <InputPhone
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name="birthdate"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Cumpleaños</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="date"
-                  onChange={field.onChange}
-                  value={String(field.value)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="notes"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Notas</FormLabel>
-              <FormControl>
-                <Textarea {...field} className="h-32 resize-none" />
-              </FormControl>
-              <FormDescription>Solo vos podes ver estas notas</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="text" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FormFieldContainer>
+        </FormGroupSection>
 
         <FormGroupSection>
           <FormGroupHeader>
@@ -298,6 +297,21 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
             />
           </FormFieldContainer>
         </FormGroupSection>
+
+        <FormField
+          control={form.control}
+          name="notes"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Notas</FormLabel>
+              <FormControl>
+                <Textarea {...field} className="h-32 resize-none" />
+              </FormControl>
+              <FormDescription>Solo vos podes ver estas notas</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormErrorsAlert message={form.formState.errors.root?.message} />
 
