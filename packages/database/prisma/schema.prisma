@@ -192,7 +192,11 @@ model Customer {
   id           String        @id @default(cuid())
   name         String        @db.VarChar(100)
   email        String?       @db.VarChar(100)
-  phoneNumber  String?       @db.VarChar(100)
+  phoneNumber  String?       @db.VarChar(50)
+  address      String?       @db.VarChar(50)
+  city         String?       @db.VarChar(100)
+  province     String?       @db.VarChar(100)
+  country      String?       @db.VarChar(100)
   notes        String?       @db.Text()
   birthdate    DateTime?
   createdAt    DateTime      @default(now())

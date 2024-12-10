@@ -9,6 +9,7 @@ export const configurationFormSchema = z.object({
   address: z.string().optional(),
   city: z.string().optional(),
   province: z.string().optional(),
+  country: z.string().optional(),
   email: z.string().email("Email inválido").min(1, "Requerido"),
   slug: z.string().min(1, "Requerido").max(56, "Máximo 56 caracteres"),
   welcomeText: z.string().optional(),

@@ -42,6 +42,10 @@ export async function createCustomer(
       phoneNumber: data.phoneNumber,
       companyId: user.company.id,
       notes: data.notes,
+      address: data.address,
+      city: data.city,
+      province: data.province,
+      country: data.country,
       birthdate: data.birthdate
         ? new Date(
             new Date(data.birthdate).getFullYear(),
@@ -87,6 +91,7 @@ export async function updateCustomer(
       fieldErrors: error.flatten().fieldErrors,
     };
   }
+  console.log(data);
 
   const customer = await db.customer.update({
     where: {
@@ -98,6 +103,10 @@ export async function updateCustomer(
       email: data.email,
       phoneNumber: data.phoneNumber,
       notes: data.notes,
+      address: data.address,
+      city: data.city,
+      province: data.province,
+      country: data.country,
       birthdate: data.birthdate
         ? new Date(
             new Date(data.birthdate).getFullYear(),

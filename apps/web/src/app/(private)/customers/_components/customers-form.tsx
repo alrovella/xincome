@@ -24,10 +24,25 @@ import EntityDatesInfo from "@/components/common/EntityDatesInfo";
 import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import InputPhone from "@repo/ui/components/ui/phone-input";
 import { format } from "date-fns";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui/components/ui/select";
+import { Country, State, City } from "country-state-city";
+import { MapPin } from "lucide-react";
+import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
+import FormFieldContainer from "@/components/common/layout/form/FormFieldContainer";
+import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
 
 const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
   const router = useRouter();
-
+  const countries = Country.getAllCountries().filter(
+    (c) => c.name === "Argentina"
+  );
   const form = useForm<z.infer<typeof customerFormSchema>>({
     resolver: zodResolver(customerFormSchema),
     defaultValues: {
@@ -35,6 +50,10 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
       phoneNumber: customer?.phoneNumber ?? "",
       email: customer?.email ?? "",
       notes: customer?.notes ?? "",
+      address: customer?.address ?? "",
+      country: customer?.country ?? "",
+      province: customer?.province ?? "",
+      city: customer?.city ?? "",
       birthdate: customer?.birthdate
         ? format(customer?.birthdate, "yyyy-MM-dd")
         : undefined,
@@ -146,6 +165,139 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
           )}
         />
 
+        <FormGroupSection>
+          <FormGroupHeader>
+            <MapPin className="mr-2 text-primary" /> UBICACIÓN
+          </FormGroupHeader>
+          <FormFieldContainer>
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Dirección</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="text" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>País</FormLabel>
+                  <FormControl>
+                    <Select
+                      value={field.value}
+                      onValueChange={(e) => {
+                        field.onChange(e);
+                        form.setValue("province", "");
+                        form.setValue("city", "");
+                      }}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar País" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {countries.map((country) => (
+                            <SelectItem
+                              key={country.isoCode}
+                              value={country.isoCode}
+                            >
+                              {country.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="province"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Provincia</FormLabel>
+                  <FormControl>
+                    <Select
+                      value={field.value}
+                      onValueChange={(e) => {
+                        field.onChange(e);
+                        form.setValue("city", "");
+                      }}
+                      disabled={!form.watch("country")}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar Provincia" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {State.getStatesOfCountry(
+                            form.getValues("country")
+                          ).map((province) => (
+                            <SelectItem
+                              key={province.isoCode}
+                              value={province.isoCode}
+                            >
+                              {province.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Ciudad</FormLabel>
+                  <FormControl>
+                    <Select
+                      value={field.value}
+                      onValueChange={(e) => {
+                        field.onChange(e);
+                      }}
+                      disabled={!form.watch("province")}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar Ciudad" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {City.getCitiesOfState(
+                            form.watch("country") as string,
+                            form.watch("province") as string
+                          ).map((city) => (
+                            <SelectItem key={city.name} value={city.name}>
+                              {city.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FormFieldContainer>
+        </FormGroupSection>
+
         <FormErrorsAlert message={form.formState.errors.root?.message} />
 
         <EntityDatesInfo
@@ -153,6 +305,7 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
           updatedAt={customer?.updatedAt}
         />
 
+        <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
         <FormFooter>
           <Button
             variant="outline"

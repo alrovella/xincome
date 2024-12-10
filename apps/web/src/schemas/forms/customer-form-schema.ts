@@ -6,4 +6,8 @@ export const customerFormSchema = z.object({
   phoneNumber: z.string().min(1, "Requerido"),
   notes: z.string().optional(),
   birthdate: z.string().optional(),
+  address: z.string().optional(),
+  city: z.string().optional(),
+  province: z.string().optional(),
+  country: z.string().optional(),
 });

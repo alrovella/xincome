@@ -41,19 +41,24 @@ import { Switch } from "@repo/ui/components/ui/switch";
 import { useGetCategories } from "@/hooks/queries/useGetCategories";
 import { configurationFormSchema } from "@/schemas/forms/configuration-form";
 import { Textarea } from "@repo/ui/components/ui/textarea";
-import { getProvinces } from "@/util/utils";
 import FormFooter from "@/components/common/forms/FormFooter";
 import { updateCompany } from "@/server/actions/company";
 import { HelpDialog } from "@/components/common/HelpDialog";
 import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import type { ExtendedCompany } from "@/types/entities/companies";
 import InputPhone from "@repo/ui/components/ui/phone-input";
+import { Country, State, City } from "country-state-city";
+import FormFieldContainer from "@/components/common/layout/form/FormFieldContainer";
+import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
+import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
+
 const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
   const router = useRouter();
-
   const { edgestore } = useEdgeStore();
   const { data: categories } = useGetCategories();
-
+  const countries = Country.getAllCountries().filter(
+    (c) => c.name === "Argentina"
+  );
   const inputLogoRef = useRef<HTMLInputElement>(null);
   const inputHeaderImageRef = useRef<HTMLInputElement>(null);
   const [fileLogo, setFileLogo] = useState<File>();
@@ -73,13 +78,14 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
       instagram: company.instagram ?? "",
       facebook: company.facebook ?? "",
       address: company.address ?? "",
+      country: company.country ?? "",
+      province: company.province ?? "",
       city: company.city ?? "",
       email: company.email ?? "",
       phoneNumber: company.phoneNumber ?? "",
       welcomeText: company.welcomeText ?? "",
       logo: company.logo ?? "",
       headerImage: company.headerImage ?? "",
-      province: company.province ?? "",
       whatsapp: company.whatsapp ?? "",
       webReservations: company.options?.webReservations ?? false,
       webPayments: company.options?.webPayments ?? false,
@@ -505,22 +511,44 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
-              name="city"
+              name="country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ciudad</FormLabel>
+                  <FormLabel>País</FormLabel>
                   <FormControl>
-                    <Input {...field} type="text" />
+                    <Select
+                      value={field.value}
+                      onValueChange={(e) => {
+                        field.onChange(e);
+                        form.setValue("province", "");
+                        form.setValue("city", "");
+                      }}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar País" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {countries.map((country) => (
+                            <SelectItem
+                              key={country.isoCode}
+                              value={country.isoCode}
+                            >
+                              {country.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </FormControl>
-                  <FormDescription>
-                    Escribí la ciudad del negocio
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="province"
@@ -532,23 +560,65 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
                       value={field.value}
                       onValueChange={(e) => {
                         field.onChange(e);
+                        form.setValue("city", "");
                       }}
+                      disabled={!form.watch("country")}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Seleccionar Provincia" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          {getProvinces().map((province) => (
-                            <SelectItem key={province} value={province}>
-                              {province}
+                          {State.getStatesOfCountry(form.watch("country")).map(
+                            (province) => (
+                              <SelectItem
+                                key={province.isoCode}
+                                value={province.isoCode}
+                              >
+                                {province.name}
+                              </SelectItem>
+                            )
+                          )}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Ciudad</FormLabel>
+                  <FormControl>
+                    <Select
+                      value={field.value}
+                      onValueChange={(e) => {
+                        field.onChange(e);
+                      }}
+                      disabled={!form.watch("province")}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar Ciudad" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {City.getCitiesOfState(
+                            form.watch("country") as string,
+                            form.watch("province") as string
+                          ).map((city) => (
+                            <SelectItem key={city.name} value={city.name}>
+                              {city.name}
                             </SelectItem>
                           ))}
                         </SelectGroup>
                       </SelectContent>
                     </Select>
                   </FormControl>
-                  <FormDescription>La provincia del negocio</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -689,29 +759,3 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
 };
 
 export default ConfigurationForm;
-
-function FormGroupHeader({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <h2 className="flex items-center mb-6 font-semibold text-foreground text-xl">
-      {children}
-    </h2>
-  );
-}
-
-function FormFieldContainer({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <div className="gap-6 grid grid-cols-1 md:grid-cols-2">{children}</div>
-  );
-}
-
-function FormGroupSection({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <section className="border-gray-200 pb-8 border-b">{children}</section>
-  );
-}

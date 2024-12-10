@@ -29,7 +29,7 @@ export const updateCompany = async (
       fieldErrors: error.flatten().fieldErrors,
     };
   }
-  console.log("data", data);
+
   const company = await db.company.update({
     where: { id: user.company.id },
     data: {
@@ -41,6 +41,7 @@ export const updateCompany = async (
       address: data.address,
       city: data.city,
       province: data.province,
+      country: data.country,
       phoneNumber: data.phoneNumber,
       email: data.email,
       whatsapp: data.whatsapp,
