@@ -32,9 +32,11 @@ import { Button } from "@repo/ui/components/ui/button";
 import { cancelSale } from "@/server/actions/sales";
 import toast from "react-hot-toast";
 import type { Period } from "@/util/static";
+import { useRouter } from "next/navigation";
 
-const SaleList = () => {
+const SaleList = ({ customerId }: { customerId?: string }) => {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const period = searchParams.get("period")
     ? (searchParams.get("period") as (typeof Period)[number])
@@ -46,6 +48,7 @@ const SaleList = () => {
     isCancelled: searchParams.get("isCancelled") === "true",
     page: Number(searchParams.get("page") ?? 1),
     limit: 10,
+    customerId,
   });
 
   const handleCancelSale = async (saleId: number) => {
@@ -66,14 +69,29 @@ const SaleList = () => {
       ) : (
         <>
           {data?.length === 0 && (
-            <EmptyStateAlert>
+            <EmptyStateAlert className="flex flex-col items-center gap-2">
               <ShoppingCart className="mb-4 text-destructive size-12" />
               <h2 className="mb-2 font-semibold text-2xl">
-                No hay ventas disponibles
+                {customerId ? (
+                  <>El cliente no tiene ventas</>
+                ) : (
+                  <> No hay ventas disponibles</>
+                )}
               </h2>
               <p className="text-sm">
-                En este momento no hay ventas registradas en el sistema.
+                {customerId ? (
+                  <>No hay ventas relacionadas con el cliente seleccionado</>
+                ) : (
+                  <>En este momento no hay ventas registradas en el sistema</>
+                )}
               </p>
+              <div>
+                {customerId ? (
+                  <Button variant={"outline"} onClick={() => router.back()}>
+                    Volver
+                  </Button>
+                ) : null}
+              </div>
             </EmptyStateAlert>
           )}
           {data && data?.length > 0 && (

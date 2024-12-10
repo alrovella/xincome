@@ -12,6 +12,7 @@ type getSalesFilter = {
   page: number;
   limit: number;
   isCancelled: boolean;
+  customerId?: string;
 };
 
 export const getAllSales = async ({
@@ -20,6 +21,7 @@ export const getAllSales = async ({
   period,
   bankAccountId,
   isCancelled = false,
+  customerId,
 }: getSalesFilter): Promise<SaleListItem[]> => {
   const logInfo = await getLoggedInUser();
   if (!logInfo) return [];
@@ -44,6 +46,7 @@ export const getAllSales = async ({
     where: {
       companyId: logInfo.company.id,
       isCancelled,
+      customerId,
       bankAccountTransactions: bankAccountTransactionsFilter,
       createdAt: {
         gte: periodDates.startDate,

@@ -85,13 +85,16 @@ const CustomerList = () => {
                       <SecondaryLink href={`/customers/edit/${item.id}`}>
                         <Pencil className="w-4 h-4" />
                       </SecondaryLink>
+                      <SecondaryLink href={`/sales?customerId=${item.id}`}>
+                        Ventas
+                      </SecondaryLink>
                       <CustomerAppointmentsDrawer
                         customerId={item.id}
                         customerName={item.name}
                         buttonClassName={cn(
                           buttonVariants({ variant: "outline", size: "xs" })
                         )}
-                        buttonText="Ultimos turnos"
+                        buttonText="Turnos"
                       />
                       <DeleteAlertDialog
                         description="Seguro de eliminar el cliente? Todos los turnos asociados a este cliente serán

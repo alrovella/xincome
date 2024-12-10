@@ -9,6 +9,7 @@ type salesOptions = useQueryOptions & {
   page: number;
   limit: number;
   isCancelled: boolean;
+  customerId?: string;
 };
 
 export function useSales({
@@ -17,11 +18,27 @@ export function useSales({
   page = 1,
   limit = 10,
   isCancelled,
+  customerId,
 }: salesOptions) {
   const { isLoading, error, data, refetch, isRefetching } = useQuery({
-    queryKey: ["getAllSales", period, bankAccountId, page, limit, isCancelled],
+    queryKey: [
+      "getAllSales",
+      period,
+      bankAccountId,
+      page,
+      limit,
+      isCancelled,
+      customerId,
+    ],
     queryFn: () =>
-      getAllSales({ period, bankAccountId, page, limit, isCancelled }),
+      getAllSales({
+        period,
+        bankAccountId,
+        page,
+        limit,
+        isCancelled,
+        customerId,
+      }),
   });
 
   return { isLoading, error, data, refetch, isRefetching };
