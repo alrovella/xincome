@@ -16,7 +16,7 @@ import {
 } from "@repo/ui/components/ui/popover";
 import { Button } from "@repo/ui/components/ui/button";
 import { usePurchases } from "@/hooks/queries/usePurchases";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import EmptyStateAlert from "@/components/common/EmptyStateAlert";
 import ListSkeleton from "@/components/common/skeletons/ListSkeleton";
 import { formatPrice } from "@/util/utils";
@@ -24,8 +24,10 @@ import SecondaryLink from "@/components/common/links/SecondaryLink";
 import { format } from "date-fns";
 import type { Period } from "@/util/static";
 
-const PurchaseList = () => {
+const PurchaseList = ({ supplierId }: { supplierId?: string }) => {
   const searchParams = useSearchParams();
+
+  const router = useRouter();
 
   const period = searchParams.get("period")
     ? (searchParams.get("period") as (typeof Period)[number])
@@ -42,6 +44,7 @@ const PurchaseList = () => {
     bankAccountId: searchParams.get("bankAccountId")
       ? Number(searchParams.get("bankAccountId"))
       : undefined,
+    supplierId,
   });
   return (
     <>
@@ -50,14 +53,29 @@ const PurchaseList = () => {
       ) : (
         <>
           {purchases?.length === 0 && (
-            <EmptyStateAlert>
+            <EmptyStateAlert className="flex flex-col items-center gap-2">
               <ShoppingCart className="mb-4 text-destructive size-12" />
               <h2 className="mb-2 font-semibold text-2xl">
-                No hay compras disponibles
+                {supplierId ? (
+                  <>No hay compras con el proveedor</>
+                ) : (
+                  <> No hay compras disponibles</>
+                )}
               </h2>
               <p className="text-sm">
-                En este momento no hay compras registradas en el sistema.
+                {supplierId ? (
+                  <>No hay compras relacionadas con el proveedor seleccionado</>
+                ) : (
+                  <>En este momento no hay compras registradas en el sistema</>
+                )}
               </p>
+              <div>
+                {supplierId ? (
+                  <Button variant={"outline"} onClick={() => router.back()}>
+                    Volver
+                  </Button>
+                ) : null}
+              </div>
             </EmptyStateAlert>
           )}
           {purchases && purchases?.length > 0 && (

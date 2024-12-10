@@ -25,8 +25,8 @@ export const getAllSuppliers = async (
   return data;
 };
 
-export const getSupplier = async (id: string) => {
-  if (!id) {
+export const getSupplier = async ({ supplierId }: { supplierId: string }) => {
+  if (!supplierId) {
     return null;
   }
 
@@ -34,7 +34,7 @@ export const getSupplier = async (id: string) => {
   if (!logInfo) return null;
 
   const data = await db.supplier.findFirst({
-    where: { id, companyId: logInfo.company.id, deleted: false },
+    where: { id: supplierId, companyId: logInfo.company.id, deleted: false },
   });
 
   return data;

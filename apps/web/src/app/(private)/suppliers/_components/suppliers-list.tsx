@@ -66,6 +66,9 @@ const SupplierList = () => {
                       <SecondaryLink href={`/suppliers/edit?id=${item.id}`}>
                         <Pencil className="w-4 h-4" />
                       </SecondaryLink>
+                      <SecondaryLink href={`/purchases?supplierId=${item.id}`}>
+                        Compras
+                      </SecondaryLink>
                       <DeleteAlertDialog
                         description="Seguro de eliminar el proveedor?"
                         onDelete={() => handleDelete(item.id)}

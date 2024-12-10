@@ -8,6 +8,7 @@ type purchasesOptions = useQueryOptions & {
   page: number;
   limit: number;
   bankAccountId?: number;
+  supplierId?: string;
 };
 
 export function usePurchases({
@@ -15,10 +16,19 @@ export function usePurchases({
   limit = 10,
   period,
   bankAccountId,
+  supplierId,
 }: purchasesOptions) {
   const { isLoading, error, data, isRefetching } = useQuery({
-    queryKey: ["getAllPurchases", period, page, limit, bankAccountId],
-    queryFn: () => getAllPurchases({ period, page, limit, bankAccountId }),
+    queryKey: [
+      "getAllPurchases",
+      period,
+      page,
+      limit,
+      bankAccountId,
+      supplierId,
+    ],
+    queryFn: () =>
+      getAllPurchases({ period, page, limit, bankAccountId, supplierId }),
   });
 
   return { isLoading, error, data, isRefetching };

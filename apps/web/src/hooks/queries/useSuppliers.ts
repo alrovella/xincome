@@ -20,7 +20,7 @@ type suppliersOptions = useQueryOptions & {
 export function useSupplier({ id }: suppliersOptions) {
   const { isLoading, error, data } = useQuery({
     queryKey: ["getSupplier", id],
-    queryFn: () => getSupplier(id),
+    queryFn: () => getSupplier({ supplierId: id }),
   });
 
   return { isLoading, error, data };

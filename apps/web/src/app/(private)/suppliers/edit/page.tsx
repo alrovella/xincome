@@ -10,7 +10,7 @@ export default async function Page({
   searchParams: Promise<{ id: string }>;
 }) {
   const { id } = await searchParams;
-  const supplier = await getSupplier(id);
+  const supplier = await getSupplier({ supplierId: id });
 
   return (
     <Container title={`${supplier ? "Editar" : "Nuevo"} Proveedor`}>

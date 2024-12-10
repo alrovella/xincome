@@ -11,10 +11,11 @@ type getPurchasesFilter = {
   limit: number;
   period: (typeof Period)[number];
   bankAccountId?: number;
+  supplierId?: string;
 };
 
 export const getAllPurchases = async (
-  { page, limit, period, bankAccountId }: getPurchasesFilter = {
+  { page, limit, period, bankAccountId, supplierId }: getPurchasesFilter = {
     page: 1,
     limit: 10,
     period: "ESTEMES",
@@ -41,6 +42,7 @@ export const getAllPurchases = async (
       createdAt: "desc",
     },
     where: {
+      supplierId,
       companyId: logInfo.company.id,
       bankAccountTransactions: bankAccountTransactionsFilter,
       createdAt: {
