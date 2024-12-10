@@ -34,9 +34,9 @@ import {
 } from "@repo/ui/components/ui/select";
 import { Country, State, City } from "country-state-city";
 import { MapPin, Phone, User } from "lucide-react";
-import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
-import FormFieldContainer from "@/components/common/layout/form/FormFieldContainer";
-import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
+import FormGroupSection from "@/components/common/forms/FormGroupSection";
+import FormFieldContainer from "@/components/common/forms/FormFieldContainer";
+import FormGroupHeader from "@/components/common/forms/FormGroupHeader";
 
 const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
   const defaultCountryIsoCode = "AR";

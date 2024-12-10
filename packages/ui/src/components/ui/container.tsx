@@ -59,7 +59,9 @@ export const Container = ({
       >
         <div className="flex justify-between items-end w-full">
           <h1 className="font-bold text-2xl">{title}</h1>
-          {headerChildren && <div>{headerChildren}</div>}
+          {headerChildren && (
+            <div className="flex items-end gap-1">{headerChildren}</div>
+          )}
         </div>
       </div>
       <CardContent className="mt-8 px-1 py-0">{children}</CardContent>

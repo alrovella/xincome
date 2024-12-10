@@ -22,9 +22,9 @@ import toast from "react-hot-toast";
 import EntityDatesInfo from "@/components/common/EntityDatesInfo";
 import { Textarea } from "@repo/ui/components/ui/textarea";
 import InputPhone from "@repo/ui/components/ui/phone-input";
-import FormFieldContainer from "@/components/common/layout/form/FormFieldContainer";
-import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
-import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
+import FormFieldContainer from "@/components/common/forms/FormFieldContainer";
+import FormGroupHeader from "@/components/common/forms/FormGroupHeader";
+import FormGroupSection from "@/components/common/forms/FormGroupSection";
 import { Phone, User } from "lucide-react";
 
 const SupplierForm = ({ supplier }: { supplier: Supplier | null }) => {

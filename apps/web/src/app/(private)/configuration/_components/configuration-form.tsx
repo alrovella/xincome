@@ -48,9 +48,9 @@ import FormErrorsAlert from "@/components/common/forms/FormErrorsAlert";
 import type { ExtendedCompany } from "@/types/entities/companies";
 import InputPhone from "@repo/ui/components/ui/phone-input";
 import { Country, State, City } from "country-state-city";
-import FormFieldContainer from "@/components/common/layout/form/FormFieldContainer";
-import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
-import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
+import FormFieldContainer from "@/components/common/forms/FormFieldContainer";
+import FormGroupHeader from "@/components/common/forms/FormGroupHeader";
+import FormGroupSection from "@/components/common/forms/FormGroupSection";
 
 const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
   const defaultCountryIsoCode = "AR";
