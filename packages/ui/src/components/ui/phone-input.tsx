@@ -73,7 +73,7 @@ const CountrySelect = ({
   };
 
   return (
-    <div className="inline-flex relative focus-within:z-10 items-center border-input bg-background hover:bg-accent has-[:disabled]:opacity-50 py-2 border focus-within:border-ring rounded-s-lg focus-within:ring-2 focus-within:ring-ring/30 ring-offset-background focus-within:ring-offset-2 text-muted-foreground hover:text-foreground focus-within:text-foreground transition-shadow has-[:disabled]:pointer-events-none pe-2 ps-3 self-stretch focus-within:outline-none">
+    <div className="inline-flex relative focus-within:z-10 items-center border-input bg-background hover:bg-accent has-[:disabled]:opacity-50 py-2 border focus-within:border-ring rounded-s-lg focus-within:ring-2 focus-within:ring-ring/30 ring-offset-background focus-within:ring-offset-2 text-muted-foreground hover:text-foreground focus-within:text-foreground transition-shadow has-[:disabled]:pointer-events-none focus-within:outline-none pe-2 ps-3 self-stretch">
       <div className="inline-flex items-center gap-1" aria-hidden="true">
         <FlagComponent country={value} countryName={value} aria-hidden="true" />
         <span className="text-muted-foreground/80">
@@ -88,7 +88,7 @@ const CountrySelect = ({
         aria-label="Select country"
       >
         <option key="default" value="">
-          Select a country
+          Seleccionar País
         </option>
         {options
           .filter((x) => x.value)
