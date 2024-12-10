@@ -86,10 +86,10 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
       city: company.city ?? "",
       email: company.email ?? "",
       phoneNumber: company.phoneNumber ?? "",
+      whatsapp: company.whatsapp ?? "",
       welcomeText: company.welcomeText ?? "",
       logo: company.logo ?? "",
       headerImage: company.headerImage ?? "",
-      whatsapp: company.whatsapp ?? "",
       webReservations: company.options?.webReservations ?? false,
       webPayments: company.options?.webPayments ?? false,
       webServicesVisibility:

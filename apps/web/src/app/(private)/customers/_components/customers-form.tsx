@@ -49,6 +49,7 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
     defaultValues: {
       name: customer?.name ?? "",
       phoneNumber: customer?.phoneNumber ?? "",
+      whatsapp: customer?.whatsapp ?? "",
       email: customer?.email ?? "",
       notes: customer?.notes ?? "",
       address: customer?.address ?? "",
@@ -130,13 +131,31 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
           <FormGroupHeader>
             <Phone className="mr-2 text-primary" /> DATOS DE CONTACTO
           </FormGroupHeader>
-          <FormFieldContainer>
+          <FormFieldContainer className="md:grid-cols-3">
             <FormField
               control={form.control}
               name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Teléfono</FormLabel>
+                  <FormControl>
+                    <InputPhone
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="whatsapp"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Whatsapp</FormLabel>
                   <FormControl>
                     <InputPhone
                       {...field}

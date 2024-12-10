@@ -177,7 +177,8 @@ model Supplier {
   id          String     @id @default(cuid())
   name        String     @db.VarChar(100)
   email       String?    @db.VarChar(100)
-  phoneNumber String?    @db.VarChar(100)
+  phoneNumber String?    @db.VarChar(50)
+  whatsapp    String?    @db.VarChar(50)
   purchases   Purchase[]
   products    Product[]
   notes       String?    @db.Text()
@@ -193,6 +194,7 @@ model Customer {
   name         String        @db.VarChar(100)
   email        String?       @db.VarChar(100)
   phoneNumber  String?       @db.VarChar(50)
+  whatsapp     String?       @db.VarChar(50)
   address      String?       @db.VarChar(50)
   city         String?       @db.VarChar(100)
   province     String?       @db.VarChar(100)
@@ -217,8 +219,8 @@ model Company {
   city                     String?                  @db.VarChar(100)
   province                 String?                  @db.VarChar(100)
   country                  String?                  @db.VarChar(100)
-  phoneNumber              String?                  @db.VarChar(100)
-  whatsapp                 String?                  @db.VarChar(100)
+  phoneNumber              String?                  @db.VarChar(50)
+  whatsapp                 String?                  @db.VarChar(50)
   email                    String?                  @db.VarChar(100)
   createdAt                DateTime                 @default(now())
   updatedAt                DateTime                 @updatedAt

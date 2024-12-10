@@ -43,8 +43,8 @@ export const updateCompany = async (
       province: data.province,
       country: data.country,
       phoneNumber: data.phoneNumber,
-      email: data.email,
       whatsapp: data.whatsapp,
+      email: data.email,
       logo: data.logo,
       headerImage: data.headerImage,
       options: {

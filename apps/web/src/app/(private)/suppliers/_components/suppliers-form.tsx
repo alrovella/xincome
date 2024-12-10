@@ -22,6 +22,10 @@ import toast from "react-hot-toast";
 import EntityDatesInfo from "@/components/common/EntityDatesInfo";
 import { Textarea } from "@repo/ui/components/ui/textarea";
 import InputPhone from "@repo/ui/components/ui/phone-input";
+import FormFieldContainer from "@/components/common/layout/form/FormFieldContainer";
+import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
+import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
+import { Phone, User } from "lucide-react";
 
 const SupplierForm = ({ supplier }: { supplier: Supplier | null }) => {
   const router = useRouter();
@@ -32,6 +36,7 @@ const SupplierForm = ({ supplier }: { supplier: Supplier | null }) => {
       name: supplier?.name ?? "",
       email: supplier?.email ?? "",
       phoneNumber: supplier?.phoneNumber ?? "",
+      whatsapp: supplier?.whatsapp ?? "",
       notes: supplier?.notes ?? "",
     },
   });
@@ -61,48 +66,82 @@ const SupplierForm = ({ supplier }: { supplier: Supplier | null }) => {
         className="flex flex-col gap-6"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <FormField
-          {...form.register("name")}
-          render={({ field }) => (
-            <FormItem className="flex flex-col justify-end h-auto md:h-22">
-              <FormLabel>Nombre</FormLabel>
-              <FormControl>
-                <Input {...field} type="text" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <FormGroupSection>
+          <FormGroupHeader>
+            <User className="mr-2 text-primary" /> GENERAL
+          </FormGroupHeader>
+          <FormFieldContainer className="md:grid-cols-3">
+            <FormField
+              {...form.register("name")}
+              render={({ field }) => (
+                <FormItem className="flex flex-col justify-end h-auto md:h-22">
+                  <FormLabel>Nombre</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="text" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FormFieldContainer>
+        </FormGroupSection>
 
-        <FormField
-          {...form.register("phoneNumber")}
-          render={({ field }) => (
-            <FormItem className="flex flex-col justify-end h-auto md:h-22">
-              <FormLabel>Teléfono</FormLabel>
-              <FormControl>
-                <InputPhone
-                  {...field}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <FormGroupSection>
+          <FormGroupHeader>
+            <Phone className="mr-2 text-primary" /> DATOS DE CONTACTO
+          </FormGroupHeader>
+          <FormFieldContainer className="md:grid-cols-3">
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Teléfono</FormLabel>
+                  <FormControl>
+                    <InputPhone
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          {...form.register("email")}
-          render={({ field }) => (
-            <FormItem className="flex flex-col justify-end h-auto md:h-22">
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input {...field} type="text" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="whatsapp"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Whatsapp</FormLabel>
+                  <FormControl>
+                    <InputPhone
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="text" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FormFieldContainer>
+        </FormGroupSection>
 
         <FormField
           control={form.control}
