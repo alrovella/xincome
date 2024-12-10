@@ -53,12 +53,15 @@ import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
 import FormGroupSection from "@/components/common/layout/form/FormGroupSection";
 
 const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
+  const defaultCountryIsoCode = "AR";
   const router = useRouter();
+  const countries = Country.getAllCountries().filter(
+    (c) => c.isoCode === defaultCountryIsoCode
+  );
+
   const { edgestore } = useEdgeStore();
   const { data: categories } = useGetCategories();
-  const countries = Country.getAllCountries().filter(
-    (c) => c.name === "Argentina"
-  );
+
   const inputLogoRef = useRef<HTMLInputElement>(null);
   const inputHeaderImageRef = useRef<HTMLInputElement>(null);
   const [fileLogo, setFileLogo] = useState<File>();
@@ -78,7 +81,7 @@ const ConfigurationForm = ({ company }: { company: ExtendedCompany }) => {
       instagram: company.instagram ?? "",
       facebook: company.facebook ?? "",
       address: company.address ?? "",
-      country: company.country ?? "",
+      country: company.country ?? defaultCountryIsoCode,
       province: company.province ?? "",
       city: company.city ?? "",
       email: company.email ?? "",

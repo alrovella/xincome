@@ -39,9 +39,10 @@ import FormFieldContainer from "@/components/common/layout/form/FormFieldContain
 import FormGroupHeader from "@/components/common/layout/form/FormGroupHeader";
 
 const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
+  const defaultCountryIsoCode = "AR";
   const router = useRouter();
   const countries = Country.getAllCountries().filter(
-    (c) => c.name === "Argentina"
+    (c) => c.isoCode === defaultCountryIsoCode
   );
   const form = useForm<z.infer<typeof customerFormSchema>>({
     resolver: zodResolver(customerFormSchema),
@@ -51,7 +52,7 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
       email: customer?.email ?? "",
       notes: customer?.notes ?? "",
       address: customer?.address ?? "",
-      country: customer?.country ?? "",
+      country: customer?.country ?? defaultCountryIsoCode,
       province: customer?.province ?? "",
       city: customer?.city ?? "",
       birthdate: customer?.birthdate
@@ -305,7 +306,6 @@ const CustomerForm = ({ customer }: { customer?: Customer | null }) => {
           updatedAt={customer?.updatedAt}
         />
 
-        <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
         <FormFooter>
           <Button
             variant="outline"
